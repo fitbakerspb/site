@@ -165,7 +165,9 @@ if (window.location.pathname.includes('cart.html')) {
     if (resultPriceTotal === 0) {
         makeOrder.innerHTML = ''
       }
-    const minus_block = document.querySelectorAll('.minus');
+
+
+      const minus_block = document.querySelectorAll('.minus');
     minus_block.forEach(button => {
       button.addEventListener('click', function() {
         console.log('minus');
@@ -234,10 +236,19 @@ if (window.location.pathname.includes('cart.html')) {
 
     });
 
-  };
 
-  showCart();
-  showCartContainer();
+  };
+  document.addEventListener('DOMContentLoaded', function() {
+    showCart();
+    showCartContainer();
+
+
+
+  });
+
+
+
+
 
   // Получаем все кнопки "Минус"
   //const minus_block = document.querySelectorAll('.minus');
@@ -447,8 +458,4 @@ if (window.location.pathname.includes('index.html')) {
 
 
 }
-
-
-
-
 
