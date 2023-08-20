@@ -238,13 +238,13 @@ if (window.location.pathname.includes('cart.html')) {
 
 
   };
-  document.addEventListener('DOMContentLoaded', function() {
-    showCart();
-    showCartContainer();
+
+  showCart();
+  showCartContainer();
 
 
 
-  });
+
 
 
 
@@ -458,4 +458,8 @@ if (window.location.pathname.includes('index.html')) {
 
 
 }
+
+
+
+
 
