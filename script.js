@@ -162,8 +162,7 @@ if (window.location.pathname.includes('cart.html')) {
       makeOrder.innerHTML = '';
 
 
-      makeOrder.insertAdjacentHTML('beforeend',`<h2 class=h_style_makeOrder>Стоимость заказа: <span><b>${resultPriceTotal}</b></span> руб.</h2>
-      <div class="makeOrderButton" id="makeOrderButton"><button id ="makeOrderButton_button" >Отправить заказ</button></div>`);
+      makeOrder.insertAdjacentHTML('beforeend',`<h2 class=h_style_makeOrder>Стоимость заказа: <span><b>${resultPriceTotal}</b></span> руб.</h2>`);
     };
     if (resultPriceTotal === 0) {
         makeOrder.innerHTML = ''
@@ -260,7 +259,7 @@ if (window.location.pathname.includes('cart.html')) {
 
  
   let btn_order = document.getElementById("makeOrderButton_button");
-  print(btn_order)
+  print(btn_order);
 
 
   
