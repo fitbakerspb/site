@@ -167,7 +167,8 @@ if (window.location.pathname.includes('cart.html')) {
     if (resultPriceTotal === 0) {
         makeOrder.innerHTML = ''
       }
-
+      localStorage.setItem('resultPriceTotal', JSON.stringify(resultPriceTotal));
+      
 
       const minus_block = document.querySelectorAll('.minus');
     minus_block.forEach(button => {
@@ -209,6 +210,7 @@ if (window.location.pathname.includes('cart.html')) {
 
         // Проверяем, есть ли уже товар в корзине
         const cart = JSON.parse(localStorage.getItem('cart')) || {};
+        
 
         cart[itemId] += itemQuantity;
 
@@ -234,6 +236,7 @@ if (window.location.pathname.includes('cart.html')) {
         localStorage.setItem('cart', JSON.stringify(cart));
         showCart();
         showCartContainer();
+        
       });
 
     });
@@ -259,6 +262,8 @@ if (window.location.pathname.includes('cart.html')) {
 
  
   let btn_order = document.getElementById("makeOrderButton_button");
+  const resultPriceTotal_localStorage = JSON.parse(localStorage.getItem('resultPriceTotal')) || {};
+        
   
 
 
@@ -270,8 +275,8 @@ if (window.location.pathname.includes('cart.html')) {
       }
       else {
           tg.MainButton.setText("Информация о заказе отправлена");
-          item = resultPriceTotal;
-          print(resultPriceTotal)
+          item = resultPriceTotal_localStorage;
+          print(resultPriceTotal_localStorage)
           print(item)
           tg.MainButton.show();
       }
