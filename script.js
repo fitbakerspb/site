@@ -278,8 +278,8 @@ if (window.location.pathname.includes('cart.html')) {
       else {
           tg.MainButton.setText("Информация о заказе отправлена");
           item = resultPriceTotal_localStorage;
-          print(resultPriceTotal_localStorage)
-          print(item)
+          console.log(resultPriceTotal_localStorage)
+          console.log(item)
           tg.MainButton.show();
       }
   });
