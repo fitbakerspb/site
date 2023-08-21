@@ -264,7 +264,7 @@ if (window.location.pathname.includes('cart.html')) {
   let btn_order = document.getElementById("makeOrderButton_button");
   const resultPriceTotal_localStorage = JSON.parse(localStorage.getItem('resultPriceTotal'));
   
-  console.log(resultPriceTotal_localStorage);
+  
         
   
 
@@ -276,10 +276,8 @@ if (window.location.pathname.includes('cart.html')) {
           tg.MainButton.hide();
       }
       else {
-          tg.MainButton.setText("Информация о заказе отправлена");
+          tg.MainButton.setText('Вы собираетесь оформить заказ на сумму ${resultPriceTotal_localStorage} руб. Продолжить?');
           item = resultPriceTotal_localStorage;
-          console.log(resultPriceTotal_localStorage)
-          console.log(item)
           tg.MainButton.show();
       }
   });
