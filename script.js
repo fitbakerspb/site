@@ -162,7 +162,8 @@ if (window.location.pathname.includes('cart.html')) {
       makeOrder.innerHTML = '';
 
 
-      makeOrder.insertAdjacentHTML('beforeend',`<h2 class=h_style_makeOrder>Стоимость заказа: <span><b>${resultPriceTotal}</b></span> руб.</h2>`);
+      makeOrder.insertAdjacentHTML('beforeend',`<h2 class=h_style_makeOrder>Стоимость заказа: <span><b>${resultPriceTotal}</b></span> руб.</h2>
+      <div class="makeOrderButton" id="makeOrderButton"><button id ="makeOrderButton_button" >Отправить заказ</button></div>`);
     };
     if (resultPriceTotal === 0) {
         makeOrder.innerHTML = ''
@@ -257,13 +258,9 @@ if (window.location.pathname.includes('cart.html')) {
 
   let item = "";
 
-  let btn1 = document.getElementById("btn1");
-  let btn2 = document.getElementById("btn2");
-  let btn3 = document.getElementById("btn3");
-  let btn4 = document.getElementById("btn4");
-  let btn5 = document.getElementById("btn5");
-  let btn6 = document.getElementById("btn6");
+ 
   let btn_order = document.getElementById("makeOrderButton_button");
+  print(btn_order)
 
 
   
@@ -273,8 +270,8 @@ if (window.location.pathname.includes('cart.html')) {
           tg.MainButton.hide();
       }
       else {
-          tg.MainButton.setText("Вы выбрали товар №7!");
-          item = "7";
+          tg.MainButton.setText("Информация о заказе отправлена");
+          item = resultPriceTotal;
           tg.MainButton.show();
       }
   });
