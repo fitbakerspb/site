@@ -262,7 +262,8 @@ if (window.location.pathname.includes('cart.html')) {
 
  
   let btn_order = document.getElementById("makeOrderButton_button");
-  const resultPriceTotal_localStorage = localStorage.getItem('resultPriceTotal')
+  const resultPriceTotal_localStorage = JSON.parse(localStorage.getItem('resultPriceTotal'));
+  
   print(resultPriceTotal_localStorage);
         
   
