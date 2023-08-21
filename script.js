@@ -263,7 +263,7 @@ if (window.location.pathname.includes('cart.html')) {
   let btn4 = document.getElementById("btn4");
   let btn5 = document.getElementById("btn5");
   let btn6 = document.getElementById("btn6");
-  let btn_order = document.getElementById("makeOrderButton");
+  let btn_order = document.getElementById("makeOrderButton_button");
 
 
   btn1.addEventListener("click", function(){
