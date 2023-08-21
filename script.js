@@ -253,7 +253,7 @@ if (window.location.pathname.includes('cart.html')) {
   tg.expand();
 
   tg.MainButton.textColor = "#FFFFFF";
-  tg.MainButton.color = "#2cab37";
+  tg.MainButton.color = "#f5919b";
 
   let item = "";
 
