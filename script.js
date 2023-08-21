@@ -259,7 +259,7 @@ if (window.location.pathname.includes('cart.html')) {
 
  
   let btn_order = document.getElementById("makeOrderButton_button");
-  print(btn_order);
+  
 
 
   
