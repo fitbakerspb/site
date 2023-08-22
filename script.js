@@ -274,7 +274,7 @@ if (window.location.pathname.includes('cart.html')) {
       }
       else {
           tg.MainButton.setText('Оплатить в телеграм или на сайте?');
-          g.MainButton.show();
+          tg.MainButton.show();
           
           tg.sendData(resultPriceTotal_localStorage);
       }
