@@ -255,12 +255,12 @@ if (window.location.pathname.includes('cart.html')) {
   tg.MainButton.textColor = "#FFFFFF";
   tg.MainButton.color = "#f5919b";
 
-  let item = "";
+  
 
  
   let btn_order = document.getElementById("makeOrderButton_button");
-  const resultPriceTotal_localStorage = JSON.parse(localStorage.getItem('resultPriceTotal'));
-  
+  const resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));
+  console.log(resultPriceTotal_localStorage)
   
         
   
@@ -274,15 +274,14 @@ if (window.location.pathname.includes('cart.html')) {
       }
       else {
           tg.MainButton.setText('Оплатить в телеграм или на сайте?');
-          item = resultPriceTotal_localStorage;
-          tg.MainButton.show();
-          console.log(item)
-          tg.sendData("6");
+          g.MainButton.show();
+          
+          tg.sendData(resultPriceTotal_localStorage);
       }
   });
 
   Telegram.WebApp.onEvent("mainButtonClicked", function(){
-      tg.sendData("6");
+      tg.sendData(resultPriceTotal_localStorage);
   });
 
   let usercard = document.getElementById('usercard');
