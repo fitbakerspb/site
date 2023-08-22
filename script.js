@@ -277,12 +277,12 @@ if (window.location.pathname.includes('cart.html')) {
           item = resultPriceTotal_localStorage;
           tg.MainButton.show();
           console.log(item)
-          tg.sendData(item);
+          tg.sendData("6");
       }
   });
 
   Telegram.WebApp.onEvent("mainButtonClicked", function(){
-      tg.sendData(item);
+      tg.sendData("6");
   });
 
   let usercard = document.getElementById('usercard');
