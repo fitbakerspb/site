@@ -270,14 +270,14 @@ if (window.location.pathname.includes('cart.html')) {
 
   btn_order.addEventListener("click", function(){
       const resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));
-      console.log(resultPriceTotal_localStorage);
-      console.log(JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal'))));
-      tg.sendData(resultPriceTotal_localStorage);
+      
+      
       if (tg.MainButton.isVisible) {
           tg.MainButton.hide();
       }
       else {
-          tg.MainButton.setText('Оплатить в телеграм или на сайте?');
+          tg.MainButton.setText('Оплатить в телеграм или на сайте??');
+          tg.sendData(resultPriceTotal_localStorage);
           tg.MainButton.show();
       }
   });
