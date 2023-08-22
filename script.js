@@ -276,7 +276,7 @@ if (window.location.pathname.includes('cart.html')) {
           tg.MainButton.hide();
       }
       else {
-          tg.MainButton.setText('Вы собираетесь оформить заказ на сумму ${resultPriceTotal_localStorage} руб. Продолжить?');
+          tg.MainButton.setText('Вы собираетесь оформить заказ. Продолжить?');
           item = resultPriceTotal_localStorage;
           tg.MainButton.show();
       }
