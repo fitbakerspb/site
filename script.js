@@ -138,7 +138,7 @@ if (window.location.pathname.includes('cart.html')) {
       cartImgElement.src = cartProduct.images[0];
       cartImgElement.alt = 'Фото товара';
       //cartItem.appendChild(cartImgElement);
-      resultPrice = itemQuantity*cartProduct.price
+      const resultPrice = itemQuantity*cartProduct.price
       cartItem.insertAdjacentHTML('beforeend',`<div class="cartContainer" id=${itemId}>
       <img src=${cartProduct.images[0]}></img>
       <div>
@@ -258,10 +258,9 @@ if (window.location.pathname.includes('cart.html')) {
   
 
  
-  let btn_order = document.getElementById("makeOrderButton_button");
-  resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));
+  const btn_order = document.getElementById("makeOrderButton_button");
   console.log(resultPriceTotal_localStorage)
-  item = "resultPriceTotal_localStorage"
+  
   
         
   
@@ -270,19 +269,19 @@ if (window.location.pathname.includes('cart.html')) {
   
 
   btn_order.addEventListener("click", function(){
+      const resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));
+      tg.sendData(resultPriceTotal_localStorage);
       if (tg.MainButton.isVisible) {
           tg.MainButton.hide();
       }
       else {
           tg.MainButton.setText('Оплатить в телеграм или на сайте?');
           tg.MainButton.show();
-          
-          tg.sendData(resultPriceTotal_localStorage);
       }
   });
 
   Telegram.WebApp.onEvent("mainButtonClicked", function(){
-      tg.sendData(resultPriceTotal_localStorage);
+      tg.sendData(JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal'))));
   });
 
   let usercard = document.getElementById('usercard');
