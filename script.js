@@ -71,7 +71,6 @@ function getOrderButtons() {
   // Обработчик для кнопки "Заказать"
   orderButtons.forEach(button => {
     button.addEventListener('click', function() {
-      console.log(orderButtons)
       const itemId = this.dataset.itemId; // Получаем id товара из data-атрибута
       const itemQuantity = 1; // Предполагаем, что всегда заказывается 1 штука
 
@@ -173,7 +172,6 @@ if (window.location.pathname.includes('cart.html')) {
       const minus_block = document.querySelectorAll('.minus');
     minus_block.forEach(button => {
       button.addEventListener('click', function() {
-        console.log('minus');
         const itemId = this.id; // Получаем id товара из data-атрибута
         const itemQuantity = 1; // Предполагаем, что всегда заказывается 1 штука
 
@@ -204,7 +202,6 @@ if (window.location.pathname.includes('cart.html')) {
     const plus_block = document.querySelectorAll('.plus');
     document.querySelectorAll('.plus').forEach(button => {
       button.addEventListener('click', function() {
-        console.log('plus');
         const itemId = this.id; // Получаем id товара из data-атрибута
         const itemQuantity = 1; // Предполагаем, что всегда заказывается 1 штука
 
@@ -276,9 +273,11 @@ if (window.location.pathname.includes('cart.html')) {
           tg.MainButton.hide();
       }
       else {
-          tg.MainButton.setText('Вы собираетесь оформить заказ. Продолжить?');
+          tg.MainButton.setText('Оплатить в телеграм или на сайте?');
           item = resultPriceTotal_localStorage;
           tg.MainButton.show();
+          console.log(item)
+          tg.sendData(item);
       }
   });
 
