@@ -276,12 +276,12 @@ if (window.location.pathname.includes('cart.html')) {
           tg.MainButton.setText('Оплатить в телеграм или на сайте?');
           tg.MainButton.show();
           
-          tg.sendData(resultPriceTotal_localStorage);
+          tg.sendData("${resultPriceTotal_localStorage}");
       }
   });
 
   Telegram.WebApp.onEvent("mainButtonClicked", function(){
-      tg.sendData(resultPriceTotal_localStorage);
+      tg.sendData("${resultPriceTotal_localStorage}");
   });
 
   let usercard = document.getElementById('usercard');
