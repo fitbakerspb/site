@@ -259,7 +259,7 @@ if (window.location.pathname.includes('cart.html')) {
 
  
   const btn_order = document.getElementById("makeOrderButton_button");
-  console.log(resultPriceTotal_localStorage)
+  
   
   
         
