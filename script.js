@@ -259,8 +259,9 @@ if (window.location.pathname.includes('cart.html')) {
 
  
   let btn_order = document.getElementById("makeOrderButton_button");
-  const resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));
+  resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));
   console.log(resultPriceTotal_localStorage)
+  item = "resultPriceTotal_localStorage"
   
         
   
@@ -276,12 +277,12 @@ if (window.location.pathname.includes('cart.html')) {
           tg.MainButton.setText('Оплатить в телеграм или на сайте?');
           tg.MainButton.show();
           
-          tg.sendData('${resultPriceTotal_localStorage}');
+          tg.sendData(resultPriceTotal_localStorage);
       }
   });
 
   Telegram.WebApp.onEvent("mainButtonClicked", function(){
-      tg.sendData("${resultPriceTotal_localStorage}");
+      tg.sendData(resultPriceTotal_localStorage);
   });
 
   let usercard = document.getElementById('usercard');
