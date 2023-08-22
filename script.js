@@ -46,6 +46,7 @@ const cart_link = document.getElementById("cart");
 cart_link.addEventListener("click", function(){
     const resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));
     tg.sendData("cart_link");
+    tg.expand();
     
 });
 
