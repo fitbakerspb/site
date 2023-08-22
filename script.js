@@ -30,6 +30,29 @@ const products = [
 ];
 
 
+
+let tg = window.Telegram.WebApp;
+
+tg.expand();
+
+tg.MainButton.textColor = "#FFFFFF";
+tg.MainButton.color = "#f5919b";
+
+
+
+
+const cart_link = document.getElementById("cart");
+
+cart_link.addEventListener("click", function(){
+    const resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));
+    tg.sendData(cart_link);
+    
+});
+
+
+
+
+
  // Добавляем функционал отображения количества товаров в корзине
  //let products_amount = 0;
  //localStorage.clear();
@@ -247,15 +270,6 @@ if (window.location.pathname.includes('cart.html')) {
 
 
 
-
-  let tg = window.Telegram.WebApp;
-
-  tg.expand();
-
-  tg.MainButton.textColor = "#FFFFFF";
-  tg.MainButton.color = "#f5919b";
-
-  
 
  
   const btn_order = document.getElementById("makeOrderButton_button");
