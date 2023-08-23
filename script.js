@@ -141,38 +141,37 @@ function createButton(text, className, clickHandler) {
 //document.addEventListener('DOMContentLoaded', function () {
   // Находим кнопку button1
 const cart_link = document.getElementById("cart");
-const pageContent_cart = document.getElementById('pageContent_cart');
-console.log(pageContent_cart);
+//const pageContent_cart = document.getElementById('pageContent_cart');
+//console.log(pageContent_cart);
 
 // Назначаем обработчик события клика на кнопке
 cart_link.addEventListener('click', function () {
     // Скрываем содержимое <html>
-    document.documentElement.style.display = 'none';
+    document.body.innerHTML = '';
+    const newContainer = document.createElement('div');
+    newContainer.id = 'pageContainer';
+    document.body.appendChild(newContainer);
+
+      function loadPage(pageUrl) {
+        
+        const xhr = new XMLHttpRequest();
+        
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = xhr.responseText;
+                const bodyContent = tempDiv.querySelector('body').innerHTML;
+            
+                // Помещаем содержимое <body> в контейнер
+                pageContainer.innerHTML = bodyContent;
+            }
+        };
+        
+        xhr.open('GET', pageUrl, true);
+        xhr.send();
+    }
+
     
-    // Создаем объект XMLHttpRequest
-    const xhr = new XMLHttpRequest();
-    
-    // Устанавливаем обработчик события загрузки
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            // Получаем ответ в виде HTML
-            const responseHtml = xhr.responseText;
-            
-            // Находим контейнер, в который нужно вставить содержимое
-            
-            pageContent_cart.style.display = 'block';
-            
-            // Вставляем содержимое страницы page1.html в контейнер
-            pageContent_cart.innerHTML = responseHtml;
-            
-            // Отображаем содержимое <html> снова
-            // document.documentElement.style.display = 'block';
-        }
-    };
-    
-    // Открываем соединение и отправляем запрос на загрузку страницы cart.html
-    xhr.open('GET', 'cart.html', true);
-    xhr.send();
 });
 //});
 
