@@ -122,27 +122,61 @@ function createButton(text, className, clickHandler) {
 }
 
 
-const cart_link = document.getElementById("cart");
+
 
 //cart_link.addEventListener("click", function(){
-    const resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));
+    //const resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));
     //tg.sendData("cart_link");
     //tg.expand();
     
 //});
 
 // Обработчик клика на кнопке
-cart_link.addEventListener('click', function() {
+//cart_link.addEventListener('click', function() {
     // Выполняем перенаправление на другой URL
-    window.location.href = 'cart.html';
+//    window.location.href = 'cart.html';
+//});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Находим кнопку button1
+  const cart_link = document.getElementById("cart");
+  
+  // Назначаем обработчик события клика на кнопке
+  cart_link.addEventListener('click', function () {
+      // Скрываем содержимое <html>
+      document.documentElement.style.display = 'none';
+      
+      // Создаем объект XMLHttpRequest
+      const xhr = new XMLHttpRequest();
+      
+      // Устанавливаем обработчик события загрузки
+      xhr.onload = function () {
+          if (xhr.status === 200) {
+              // Получаем ответ в виде HTML
+              const responseHtml = xhr.responseText;
+              
+              // Находим контейнер, в который нужно вставить содержимое
+              const pageContent = document.getElementById('pageContent');
+              pageContent.style.display = 'block';
+              
+              // Вставляем содержимое страницы page1.html в контейнер
+              pageContent.innerHTML = responseHtml;
+              
+              // Отображаем содержимое <html> снова
+              // document.documentElement.style.display = 'block';
+          }
+      };
+      
+      // Открываем соединение и отправляем запрос на загрузку страницы cart.html
+      xhr.open('GET', 'cart.html', true);
+      xhr.send();
+  });
 });
 
 
 
-
-
-
-if (window.location.pathname.includes('cart.html')) {
+if (pageContent.style.display === 'block') {
 
   const products = [
     {id: '1',name: '«Морковный» торт с фундучным пралине и грушевым компоте',images: ['photos/1_1.jpg','photos/1_2.jpg'],description: 'Бисквитный торт приготовлен без муки и без сахара🎂🔥\nКбжу на 100 гр 141/8/8/10\nСостав:\n🍰Ароматный морковный бисквит\n🍰Цитрусовый крем \n🍰Грушевое компоте \n🍰Невероятно вкусное фундучное пралине',price: '2000'},{id: '2',name: '«Шварцвальдский» с вишней',images: ['photos/2_1.jpg','photos/2_2.jpg'],description: 'Вес ~ 1,8 кг 🔥\n\nКБЖУ на 100 грамм всего - 180/10/10/12.5 ❤️‍🔥',price: '2000'},{id: '3',name: '«Рафаэлло»',images: ['photos/3_1.jpg','photos/3_2.jpg'],description: 'Кбжу на 100 грамм 192/10/12/15\nСостав: \n🥥Нежные и сочные кокосовые коржи\n🥥Кокосовый крем \n🥥Начинка из карамелизованого хрустящего миндаля',price: '1000'},{id: '4',name: '«Вишня-кокос» с чизкейком внутри',images: ['photos/4_1.jpg','photos/4_2.jpg'],description: 'Кбжу на 100 гр.: 167/10/11,2/6,4\nСостав:\n🍰Ароматный кокосовый бисквит\n🍰Сочный вишневый соус \n🍰Нежный кокосовый чизкейк \n🍰Крем с нотками кокоса',price: '2000'},
