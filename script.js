@@ -141,6 +141,7 @@ function createButton(text, className, clickHandler) {
 //document.addEventListener('DOMContentLoaded', function () {
   // Находим кнопку button1
   const cart_link = document.getElementById("cart");
+  const pageContent = document.getElementById('pageContent');
   
   // Назначаем обработчик события клика на кнопке
   cart_link.addEventListener('click', function () {
@@ -157,7 +158,7 @@ function createButton(text, className, clickHandler) {
               const responseHtml = xhr.responseText;
               
               // Находим контейнер, в который нужно вставить содержимое
-              const pageContent = document.getElementById('pageContent');
+              
               pageContent.style.display = 'block';
               
               // Вставляем содержимое страницы page1.html в контейнер
