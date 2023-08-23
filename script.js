@@ -20,6 +20,8 @@ window.addEventListener('scroll', function() {
 });
 
 
+
+
 // Получаем параметр id из URL
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get('id');
@@ -41,14 +43,7 @@ tg.MainButton.color = "#f5919b";
 
 
 
-const cart_link = document.getElementById("cart");
 
-//cart_link.addEventListener("click", function(){
-    const resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));
-    //tg.sendData("cart_link");
-    //tg.expand();
-    
-//});
 
 
 
@@ -127,6 +122,20 @@ function createButton(text, className, clickHandler) {
 }
 
 
+const cart_link = document.getElementById("cart");
+
+//cart_link.addEventListener("click", function(){
+    const resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));
+    //tg.sendData("cart_link");
+    //tg.expand();
+    
+//});
+
+// Обработчик клика на кнопке
+cart_link.addEventListener('click', function() {
+    // Выполняем перенаправление на другой URL
+    window.location.href = 'cart.html';
+});
 
 
 
