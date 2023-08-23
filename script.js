@@ -138,7 +138,7 @@ function createButton(text, className, clickHandler) {
 //});
 
 
-document.addEventListener('DOMContentLoaded', function () {
+//document.addEventListener('DOMContentLoaded', function () {
   // Находим кнопку button1
   const cart_link = document.getElementById("cart");
   
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function () {
       xhr.open('GET', 'cart.html', true);
       xhr.send();
   });
-});
+//});
 
 
 
