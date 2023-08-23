@@ -160,10 +160,10 @@ cart_link.addEventListener('click', function () {
             
             // Находим контейнер, в который нужно вставить содержимое
             
-            pageContent.style.display = 'block';
+            pageContent_cart.style.display = 'block';
             
             // Вставляем содержимое страницы page1.html в контейнер
-            pageContent.innerHTML = responseHtml;
+            pageContent_cart.innerHTML = responseHtml;
             
             // Отображаем содержимое <html> снова
             // document.documentElement.style.display = 'block';
