@@ -180,7 +180,7 @@ cart_link.addEventListener('click', function () {
 //});
 
 
-
+const pageContainer_cart = document.getElementById("pageContainer_cart");
 if (pageContainer_cart) {
 
   const products = [
