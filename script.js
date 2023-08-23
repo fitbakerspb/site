@@ -140,40 +140,40 @@ function createButton(text, className, clickHandler) {
 
 //document.addEventListener('DOMContentLoaded', function () {
   // Находим кнопку button1
-  const cart_link = document.getElementById("cart");
-  const pageContent = document.getElementById('pageContent');
-  console.log(pageContent);
-  
-  // Назначаем обработчик события клика на кнопке
-  cart_link.addEventListener('click', function () {
-      // Скрываем содержимое <html>
-      document.documentElement.style.display = 'none';
-      
-      // Создаем объект XMLHttpRequest
-      const xhr = new XMLHttpRequest();
-      
-      // Устанавливаем обработчик события загрузки
-      xhr.onload = function () {
-          if (xhr.status === 200) {
-              // Получаем ответ в виде HTML
-              const responseHtml = xhr.responseText;
-              
-              // Находим контейнер, в который нужно вставить содержимое
-              
-              pageContent.style.display = 'block';
-              
-              // Вставляем содержимое страницы page1.html в контейнер
-              pageContent.innerHTML = responseHtml;
-              
-              // Отображаем содержимое <html> снова
-              // document.documentElement.style.display = 'block';
-          }
-      };
-      
-      // Открываем соединение и отправляем запрос на загрузку страницы cart.html
-      xhr.open('GET', 'cart.html', true);
-      xhr.send();
-  });
+const cart_link = document.getElementById("cart");
+const pageContent = document.getElementById('pageContent');
+console.log(pageContent);
+
+// Назначаем обработчик события клика на кнопке
+cart_link.addEventListener('click', function () {
+    // Скрываем содержимое <html>
+    document.documentElement.style.display = 'none';
+    
+    // Создаем объект XMLHttpRequest
+    const xhr = new XMLHttpRequest();
+    
+    // Устанавливаем обработчик события загрузки
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            // Получаем ответ в виде HTML
+            const responseHtml = xhr.responseText;
+            
+            // Находим контейнер, в который нужно вставить содержимое
+            
+            pageContent.style.display = 'block';
+            
+            // Вставляем содержимое страницы page1.html в контейнер
+            pageContent.innerHTML = responseHtml;
+            
+            // Отображаем содержимое <html> снова
+            // document.documentElement.style.display = 'block';
+        }
+    };
+    
+    // Открываем соединение и отправляем запрос на загрузку страницы cart.html
+    xhr.open('GET', 'cart.html', true);
+    xhr.send();
+});
 //});
 
 
