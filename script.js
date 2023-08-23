@@ -144,32 +144,36 @@ const cart_link = document.getElementById("cart");
 //const pageContent_cart = document.getElementById('pageContent_cart');
 //console.log(pageContent_cart);
 
+function loadPage(pageUrl) {
+        
+  const xhr = new XMLHttpRequest();
+  const pageContainer_cart = document.createElement('div');
+  pageContainer_cart.id = 'pageContainer_cart';
+  document.body.appendChild(pageContainer_cart);
+  
+  xhr.onload = function() {
+      if (xhr.status === 200) {
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = xhr.responseText;
+          const bodyContent = tempDiv.querySelector('body').innerHTML;
+      
+          // Помещаем содержимое <body> в контейнер
+          pageContainer_cart.innerHTML = bodyContent;
+      }
+  };
+  
+  xhr.open('GET', pageUrl, true);
+  xhr.send();
+}
+
 // Назначаем обработчик события клика на кнопке
 cart_link.addEventListener('click', function () {
     // Скрываем содержимое <html>
     document.body.innerHTML = '';
-    const newContainer = document.createElement('div');
-    newContainer.id = 'pageContainer_cart';
-    document.body.appendChild(newContainer);
+    
+    loadPage('cart.html');
 
-      function loadPage(pageUrl) {
-        
-        const xhr = new XMLHttpRequest();
-        
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = xhr.responseText;
-                const bodyContent = tempDiv.querySelector('body').innerHTML;
-            
-                // Помещаем содержимое <body> в контейнер
-                pageContainer.innerHTML = bodyContent;
-            }
-        };
-        
-        xhr.open('GET', pageUrl, true);
-        xhr.send();
-    }
+      
 
     
 });
