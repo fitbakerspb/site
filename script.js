@@ -142,6 +142,7 @@ function createButton(text, className, clickHandler) {
   // Находим кнопку button1
   const cart_link = document.getElementById("cart");
   const pageContent = document.getElementById('pageContent');
+  console.log(pageContent);
   
   // Назначаем обработчик события клика на кнопке
   cart_link.addEventListener('click', function () {
