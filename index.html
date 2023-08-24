@@ -9,16 +9,7 @@
 
 </head>
 <body>
-    <!--
-    <header>
-		<div><img alt="" src="" width=183 height=35 title="на главную"><a href="tel:+70000000000">+7 000 000-00-00</a>
-			<div id=moment_order></div><button class=red>заказ <span>торта</span> в 1 клик</button>
-			<div><a href="/info/dostavka/">Доставка</a><a href="/info/oplata/">Оплата</a><a href="/info/akcii/">Акции</a></div>
-		</div>
-	</header>
-    -->
-
-    <div class="header">
+   <div class="header">
         <div>
             <a class=phone_number href="tel:+79876543210">+7 987 654-32-10</a>
             <img class=cart id="cart" src="img/cart1.png"></img>
@@ -62,15 +53,12 @@
             </div>
         </div>
 
-
         <div class="checkboxBlock" id="checkboxBlock" style="display: none;">
-
                 <div class="cb_title1">
                     <div>
 
                         <h2 class=h_style_cb_title>Категория</h2>
                     </div>
-
                 </div>
                 <div class="cb_items">
                     <div class="cb_items_div" id="checkboxBlock">
@@ -78,8 +66,6 @@
                             <input type="checkbox" id="checkbox1" name="category" value="all" onchange="handleCheckboxChange(this)">
                             <label for="checkbox1">все торты</label><br>
                         </div>
-
-
                         <div class="cb_item">
                             <input type="checkbox" id="checkbox2" name="category" value="П/п торты" onchange="handleCheckboxChange(this)">
                             <label for="checkbox2">п/п торты</label><br>
@@ -88,22 +74,16 @@
                             <input type="checkbox" id="checkbox3" name="category" value="Классика" onchange="handleCheckboxChange(this)">
                             <label for="checkbox3">классика</label><br>
                         </div>
-
                     </div>
                     <div class="cb_button_applay">
-
-
                         <button id="applyButton">Применить</button>
-
                     </div>
-
                 </div>
-
         </div>
+
         <div class="cb_found_count">
             <h3 class="cb_found_count_value"></h3>
         </div>
-
 
         <div class="catalog-container">
             <div class="inner">
@@ -114,14 +94,15 @@
                         <p class="p-weight">2000 гр.</p>
                         <p class="p-title">«Морковный» торт с фундучным пралине и грушевым компоте</p>
                     </div>
+
                     <div class="buttons-container-order">
                         <p class="p-price">2000 руб.</p>
                         <button class="btn_order btn" id="btn1" data-item-id="1">В корзину</button>
                         <span class=product_in_cart_amount id="1" style="display: none;"></span>
                         <img class=cartPlus src="img/cart+.png"></img>
-
                     </div>
                 </div>
+
             <div class="item" data-category="Классика" style = "display: block;">
                     <div class="image-text-container" data-product-id="2">
                         <img src="photos/2_1.jpg" alt="cake" class="img">
@@ -135,6 +116,7 @@
                         <img class=cartPlus src="img/cart+.png"></img>
                     </div>
                 </div>
+
             <div class="item" data-category="П/п торты" style = "display: block;">
                     <div class="image-text-container" data-product-id="3">
                         <img src="photos/3_1.jpg" alt="cake" class="img">
@@ -148,6 +130,7 @@
                         <img class=cartPlus src="img/cart+.png"></img>
                     </div>
                 </div>
+
             <div class="item" data-category="П/п торты" style = "display: block;">
                     <div class="image-text-container" data-product-id="4">
                         <img src="photos/4_1.jpg" alt="cake" class="img">
@@ -161,15 +144,12 @@
                         <img class=cartPlus src="img/cart+.png"></img>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
     </section>
+
     <div class="usercard" id="usercard">
     </div>
-
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="app.js"></script>
@@ -184,4 +164,3 @@
 
 </body>
 </html>
-

@@ -22,9 +22,6 @@ window.addEventListener('scroll', function() {
   lastScrollTop = scrollTop;
 });
 
-
-
-
 // Получаем параметр id из URL
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get('id');
@@ -34,8 +31,6 @@ const products = [
   {id: '1',name: '«Морковный» торт с фундучным пралине и грушевым компоте',images: ['photos/1_1.jpg','photos/1_2.jpg'],description: 'Бисквитный торт приготовлен без муки и без сахара🎂🔥\nКбжу на 100 гр 141/8/8/10\nСостав:\n🍰Ароматный морковный бисквит\n🍰Цитрусовый крем \n🍰Грушевое компоте \n🍰Невероятно вкусное фундучное пралине',price: '2000'},{id: '2',name: '«Шварцвальдский» с вишней',images: ['photos/2_1.jpg','photos/2_2.jpg'],description: 'Вес ~ 1,8 кг 🔥\n\nКБЖУ на 100 грамм всего - 180/10/10/12.5 ❤️‍🔥',price: '2000'},{id: '3',name: '«Рафаэлло»',images: ['photos/3_1.jpg','photos/3_2.jpg'],description: 'Кбжу на 100 грамм 192/10/12/15\nСостав: \n🥥Нежные и сочные кокосовые коржи\n🥥Кокосовый крем \n🥥Начинка из карамелизованого хрустящего миндаля',price: '1000'},{id: '4',name: '«Вишня-кокос» с чизкейком внутри',images: ['photos/4_1.jpg','photos/4_2.jpg'],description: 'Кбжу на 100 гр.: 167/10/11,2/6,4\nСостав:\n🍰Ароматный кокосовый бисквит\n🍰Сочный вишневый соус \n🍰Нежный кокосовый чизкейк \n🍰Крем с нотками кокоса',price: '2000'},
 ];
 
-
-
 let tg = window.Telegram.WebApp;
 
 tg.expand();
@@ -43,51 +38,32 @@ tg.expand();
 tg.MainButton.textColor = "#FFFFFF";
 tg.MainButton.color = "#f5919b";
 
-
-
-
-
-
-
-
-
-
- // Добавляем функционал отображения количества товаров в корзине
- //let products_amount = 0;
- //localStorage.clear();
-
 function showCart() {
   const cart_amount_block = document.getElementById('cart_amount');
   const cart = JSON.parse(localStorage.getItem('cart')) || {};
   console.log('cart');
   console.log(cart);
   let products_amount = 0;
+
   for (const itemId in cart) {
-
     products_amount += parseInt(cart[itemId]);
-
-
     const product_in_cart_amount_block = document.querySelector(`.product_in_cart_amount[id="${itemId}"]`);
     console.log('product_in_cart_amount_block');
     console.log(product_in_cart_amount_block);
     if (product_in_cart_amount_block) {
       product_in_cart_amount_block.textContent = `${cart[itemId]}`;
       product_in_cart_amount_block.style.display = 'block';
-
       }
   }
   if (cart_amount_block) {
-
     if (products_amount === 0) {
       cart_amount_block.style.display = 'none';
       } else {
       cart_amount_block.style.display = 'block';
       cart_amount_block.textContent = `${products_amount}`;
       };
-
     }
 }
-
 
 function getOrderButtons() {
 
@@ -118,7 +94,6 @@ function getOrderButtons() {
 }
 ;
 
-
 // Функция для создания кнопки
 function createButton(text, className, clickHandler) {
   const button = document.createElement('button');
@@ -127,22 +102,6 @@ function createButton(text, className, clickHandler) {
   button.addEventListener('click', clickHandler);
   return button;
 }
-
-
-
-
-//cart_link.addEventListener("click", function(){
-    //const resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));
-    //tg.sendData("cart_link");
-    //tg.expand();
-
-//});
-
-// Обработчик клика на кнопке
-//cart_link.addEventListener('click', function() {
-    // Выполняем перенаправление на другой URL
-//    window.location.href = 'cart.html';
-//});
 
 
 //document.addEventListener('DOMContentLoaded', function () {
@@ -157,18 +116,12 @@ function showCartContainer() {
   // Получаем данные из localStorage и строим корзину на странице cart.html
   const cartData = JSON.parse(localStorage.getItem('cart'));
   const cartItem = document.querySelector('#cartContainer');
-  console.log('document');
-  console.log(document);
-  console.log(cartItem);
   cartItem.innerHTML = '';
-
   const makeOrder = document.querySelector('#makeOrder');
-
   let resultPriceTotal = 0;
   // Выводим данные в корзине на странице cart.html
   for (const itemId in cartData) {
     const itemQuantity = cartData[itemId];
-
 
     // Находим товар с соответствующим идентификатором
     const cartProduct = products.find(item => item.id === itemId);
@@ -194,21 +147,17 @@ function showCartContainer() {
     </div>
     </div>`);
 
-
-    //cartItem.insertAdjacentHTML('beforeend',`<div class=price-amount-total><div><h2 class=h_style_p_a_t>Цена:</h2><h2 class=h_style_p_a_t>${cartProduct.price} руб.</h2><h2 class=h_style_p_a_t>Кол-во:</h2><h2 class=h_style_p_a_t>${itemQuantity}</h2><h2 class=h_style_p_a_t>Итого:</h2><h2 class=h_style_p_a_t>${resultPrice} руб.</h2></div></div>`);
     resultPriceTotal += resultPrice;
     makeOrder.innerHTML = '';
-
 
     makeOrder.insertAdjacentHTML('beforeend',`<h2 class=h_style_makeOrder>Стоимость заказа: <span><b>${resultPriceTotal}</b></span> руб.</h2>`);
   };
   if (resultPriceTotal === 0) {
       makeOrder.innerHTML = ''
     }
-    localStorage.setItem('resultPriceTotal', JSON.stringify(resultPriceTotal));
 
-
-    const minus_block = document.querySelectorAll('.minus');
+  localStorage.setItem('resultPriceTotal', JSON.stringify(resultPriceTotal));
+  const minus_block = document.querySelectorAll('.minus');
   minus_block.forEach(button => {
     button.addEventListener('click', function() {
       const itemId = this.id; // Получаем id товара из data-атрибута
@@ -220,7 +169,6 @@ function showCartContainer() {
       if (cart[itemId] === 1) {
         cart[itemId] -= itemQuantity;
         delete cart[itemId];
-
 
       } else {
         cart[itemId] -= itemQuantity;
@@ -235,7 +183,6 @@ function showCartContainer() {
 
 
     });
-
   });
 
   const plus_block = document.querySelectorAll('.plus');
@@ -246,21 +193,14 @@ function showCartContainer() {
 
       // Проверяем, есть ли уже товар в корзине
       const cart = JSON.parse(localStorage.getItem('cart')) || {};
-
-
       cart[itemId] += itemQuantity;
-
       localStorage.setItem('cart', JSON.stringify(cart));
 
       showCart();
       showCartContainer();
 
-
-
     });
-
   });
-
 
   const cross_block = document.querySelectorAll('.cross');
   document.querySelectorAll('.cross').forEach(button => {
@@ -272,27 +212,14 @@ function showCartContainer() {
       localStorage.setItem('cart', JSON.stringify(cart));
       showCart();
       showCartContainer();
-
     });
-
   });
-
-
 };
 
-
 function loadPage(pageUrl, callback) {
-
   var xhr = new XMLHttpRequest();
-  //const pageContainer_cart = document.createElement('div');
-
-
-  //pageContainer_cart.id = 'pageContainer_cart';
-  //document.body.appendChild(pageContainer_cart);
-
   xhr.onload = function() {
       if (xhr.status === 200) {
-
           // Помещаем содержимое <body> в контейнер
           document.body.innerHTML = xhr.responseText;
           if (typeof callback === 'function') {
@@ -300,7 +227,6 @@ function loadPage(pageUrl, callback) {
         }
       }
   };
-
   xhr.open('GET', pageUrl, true);
   xhr.send();
 }
@@ -309,13 +235,7 @@ function loadPage(pageUrl, callback) {
 cart_link.addEventListener('click', function () {
     // Скрываем содержимое <html>
     //document.body.innerHTML = '';
-
-
-
-
     current_page = 'cart';
-
-
     //const pageContainer_cart = document.getElementById("pageContainer_cart");
     //console.log('pageContainer_cart');
     //console.log(pageContainer_cart);
@@ -323,30 +243,12 @@ cart_link.addEventListener('click', function () {
       {id: '1',name: '«Морковный» торт с фундучным пралине и грушевым компоте',images: ['photos/1_1.jpg','photos/1_2.jpg'],description: 'Бисквитный торт приготовлен без муки и без сахара🎂🔥\nКбжу на 100 гр 141/8/8/10\nСостав:\n🍰Ароматный морковный бисквит\n🍰Цитрусовый крем \n🍰Грушевое компоте \n🍰Невероятно вкусное фундучное пралине',price: '2000'},{id: '2',name: '«Шварцвальдский» с вишней',images: ['photos/2_1.jpg','photos/2_2.jpg'],description: 'Вес ~ 1,8 кг 🔥\n\nКБЖУ на 100 грамм всего - 180/10/10/12.5 ❤️‍🔥',price: '2000'},{id: '3',name: '«Рафаэлло»',images: ['photos/3_1.jpg','photos/3_2.jpg'],description: 'Кбжу на 100 грамм 192/10/12/15\nСостав: \n🥥Нежные и сочные кокосовые коржи\n🥥Кокосовый крем \n🥥Начинка из карамелизованого хрустящего миндаля',price: '1000'},{id: '4',name: '«Вишня-кокос» с чизкейком внутри',images: ['photos/4_1.jpg','photos/4_2.jpg'],description: 'Кбжу на 100 гр.: 167/10/11,2/6,4\nСостав:\n🍰Ароматный кокосовый бисквит\n🍰Сочный вишневый соус \n🍰Нежный кокосовый чизкейк \n🍰Крем с нотками кокоса',price: '2000'},
     ];
 
-
     loadPage('cart.html', function() {
-
-
-
-
 
       showCart();
       showCartContainer();
 
-
-
-
-
-
       const btn_order = document.getElementById("makeOrderButton_button");
-
-
-
-
-
-
-
-
 
       btn_order.addEventListener("click", function(){
           const resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));
@@ -370,36 +272,9 @@ cart_link.addEventListener('click', function () {
       let p = document.createElement('p');
       p.innerText = '${tg.initDataUnsafe.user.first_name}${tg.initDataUnsafe.user.last_name}';
       usercard.appendChild(p);
-
-
     });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 });
-//});
-
 
 if (window.location.pathname.includes('cart.html')) {
 
@@ -582,9 +457,6 @@ if (window.location.pathname.includes('cart.html')) {
       usercard.appendChild(p);
     }
 
-
-
-
 if (window.location.pathname.includes('product-details.html')) {
 
   // Вызываем функции только на странице product-details.html
@@ -649,14 +521,11 @@ if (window.location.pathname.includes('product-details.html')) {
   // Добавление элементов в контейнер carousel
   document.addEventListener('DOMContentLoaded', function() {
 
-
-
     const prevButton = createButton('←', 'prev-button', prevImage);
     carousel.appendChild(prevButton);
 
     const nextButton = createButton('→', 'next-button', nextImage);
     carousel.appendChild(nextButton);
-
 
     showPath();
     showTitle();
@@ -670,8 +539,6 @@ if (window.location.pathname.includes('product-details.html')) {
 }
 
 
-
-
 if (window.location.pathname.includes('index.html')) {
   // Сохранение данных в localStorage
 
@@ -682,7 +549,6 @@ if (window.location.pathname.includes('index.html')) {
 
 
   });
-
 
   // Функция для определения количества показанных товаров
   function countVisibleItems() {
@@ -716,8 +582,6 @@ if (window.location.pathname.includes('index.html')) {
           paragraph.classList.add('btn_clicked'); // Добавляем класс 'clicked' к текущему элементу
       });
   });
-
-
 
   // Получаем элементы кнопок и блока с чекбоксами
   const toggleButton = document.getElementById('toggleButton');
@@ -785,6 +649,5 @@ if (window.location.pathname.includes('index.html')) {
               }
           });
       }
-
 
 }
