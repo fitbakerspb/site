@@ -281,8 +281,8 @@ if (home_link) {
 
   home_link.addEventListener('click', function () {
     current_page = 'home';
-
-    loadPage('index.html', function() {});
+    window.location.reload();
+    //loadPage('index.html', function() {});
   })
 };
 
