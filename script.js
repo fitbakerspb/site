@@ -103,7 +103,7 @@ function createButton(text, className, clickHandler) {
 
 //document.addEventListener('DOMContentLoaded', function () {
   // Находим кнопку button1
-const cart_link = document.getElementById("cart");
+//const cart_link = document.getElementById("cart");
 //const pageContent_cart = document.getElementById('pageContent_cart');
 //console.log(pageContent_cart);
 
@@ -226,65 +226,70 @@ function loadPage(pageUrl, callback) {
   };
   xhr.open('GET', pageUrl, true);
   xhr.send();
-}
-
-// Назначаем обработчик события клика на кнопке
-cart_link.addEventListener('click', function () {
-    // Скрываем содержимое <html>
-    //document.body.innerHTML = '';
-    current_page = 'cart';
-    //const pageContainer_cart = document.getElementById("pageContainer_cart");
-    //console.log('pageContainer_cart');
-    //console.log(pageContainer_cart);
-    const products = [
-      {id: '1',name: '«Морковный» торт с фундучным пралине и грушевым компоте',images: ['photos/1_1.jpg','photos/1_2.jpg'],description: 'Бисквитный торт приготовлен без муки и без сахара🎂🔥\nКбжу на 100 гр 141/8/8/10\nСостав:\n🍰Ароматный морковный бисквит\n🍰Цитрусовый крем \n🍰Грушевое компоте \n🍰Невероятно вкусное фундучное пралине',price: '2000'},{id: '2',name: '«Шварцвальдский» с вишней',images: ['photos/2_1.jpg','photos/2_2.jpg'],description: 'Вес ~ 1,8 кг 🔥\n\nКБЖУ на 100 грамм всего - 180/10/10/12.5 ❤️‍🔥',price: '2000'},{id: '3',name: '«Рафаэлло»',images: ['photos/3_1.jpg','photos/3_2.jpg'],description: 'Кбжу на 100 грамм 192/10/12/15\nСостав: \n🥥Нежные и сочные кокосовые коржи\n🥥Кокосовый крем \n🥥Начинка из карамелизованого хрустящего миндаля',price: '1000'},{id: '4',name: '«Вишня-кокос» с чизкейком внутри',images: ['photos/4_1.jpg','photos/4_2.jpg'],description: 'Кбжу на 100 гр.: 167/10/11,2/6,4\nСостав:\n🍰Ароматный кокосовый бисквит\n🍰Сочный вишневый соус \n🍰Нежный кокосовый чизкейк \n🍰Крем с нотками кокоса',price: '2000'},
-    ];
-
-    loadPage('cart.html', function() {
-
-      showCart();
-      showCartContainer();
-
-      const btn_order = document.getElementById("makeOrderButton_button");
-
-      btn_order.addEventListener("click", function(){
-          const resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));
 
 
-          if (tg.MainButton.isVisible) {
-              tg.MainButton.hide();
-          }
-          else {
-              tg.MainButton.setText('Оплатить в телеграм или на сайте??');
-              tg.sendData(resultPriceTotal_localStorage);
-              tg.MainButton.show();
-          }
-      });
-
-      Telegram.WebApp.onEvent("mainButtonClicked", function(){
-          tg.sendData(JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal'))));
-      });
-
-      let usercard = document.getElementById('usercard');
-      let p = document.createElement('p');
-      p.innerText = '${tg.initDataUnsafe.user.first_name}${tg.initDataUnsafe.user.last_name}';
-      usercard.appendChild(p);
-    });
-    const cart_link = document.getElementById("cart");
-    const home_link = document.getElementById("container_path_img_home");
-
-});
-
-
-const home_link = document.getElementById("container_path_img_home");
-if (home_link) {
-
-  home_link.addEventListener('click', function () {
-    current_page = 'home';
-    window.location.reload();
-    //loadPage('index.html', function() {});
-  })
 };
+
+  function cart_link_Listener() {
+
+    cart_link = document.getElementById("cart");
+    // Назначаем обработчик события клика на кнопке
+    cart_link.addEventListener('click', function () {
+        current_page = 'cart';
+        loadPage('cart.html', function() {
+          showCart();
+          showCartContainer();
+
+          const btn_order = document.getElementById("makeOrderButton_button");
+
+          btn_order.addEventListener("click", function(){
+              const resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));
+
+
+              if (tg.MainButton.isVisible) {
+                  tg.MainButton.hide();
+              }
+              else {
+                  tg.MainButton.setText('Оплатить в телеграм или на сайте??');
+                  tg.sendData(resultPriceTotal_localStorage);
+                  tg.MainButton.show();
+              }
+          });
+
+          Telegram.WebApp.onEvent("mainButtonClicked", function(){
+              tg.sendData(JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal'))));
+          });
+
+          //let usercard = document.getElementById('usercard');
+          //let p = document.createElement('p');
+          //p.innerText = '${tg.initDataUnsafe.user.first_name}${tg.initDataUnsafe.user.last_name}';
+          //usercard.appendChild(p);
+          //cart_link = document.getElementById("cart");
+          //home_link = document.getElementById("container_path_img_home");
+          //window.location.reload();
+          cart_link_Listener();
+          home_link_Listener();
+        });
+
+
+    });
+  };
+cart_link_Listener();
+
+
+function home_link_Listener() {
+  const home_link = document.getElementById("container_path_img_home");
+  if (home_link) {
+
+    home_link.addEventListener('click', function () {
+      current_page = 'home';
+      window.location.reload();
+      //loadPage('index.html', function() {});
+    })
+  };
+};
+
+home_link_Listener();
 
 document.addEventListener('DOMContentLoaded', function() {
   updateVisibleItemCount();
@@ -316,17 +321,17 @@ detailsButtons.forEach(container => {
         const productId = container.dataset.productId;
         //window.location.href = `product-details.html?id=${productId}`;
         loadPage('product-details.html', function() {
-          
+
 
           // Добавляем функционал для перелистывания фотографий
           let currentIndex = 0;
 
           // Находим товар с соответствующим идентификатором
           const product = products.find(item => item.id === productId);
-          
+
 
           const carousel = document.querySelector('.product-carousel');
-          
+
           // Функция для отображения фотографий товара
           function showImages(currentIndex) {
 
@@ -393,14 +398,17 @@ detailsButtons.forEach(container => {
             showDescription();
             showPrice();
             showCart();
-            getOrderButtons()
+            getOrderButtons();
 
-            const cart_link = document.getElementById("cart");
-            const home_link = document.getElementById("container_path_img_home");
+            cart_link_Listener();
+            home_link_Listener();
+
+
 
           //});
 
-        })
+        });
+
 
     });
 });
@@ -480,7 +488,7 @@ function filterByCategory(selectedValues) {
                 product.style.display = 'none';
             }
         });
-    }
+}
 
 
 
@@ -663,7 +671,7 @@ if (window.location.pathname.includes('cart.html')) {
       let p = document.createElement('p');
       p.innerText = '${tg.initDataUnsafe.user.first_name}${tg.initDataUnsafe.user.last_name}';
       usercard.appendChild(p);
-    }
+}
 
 if (window.location.pathname.includes('product-details.html')) {
 
@@ -748,6 +756,6 @@ if (window.location.pathname.includes('product-details.html')) {
 
 
 
-  
 
-  
+
+
