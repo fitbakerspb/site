@@ -171,7 +171,7 @@ cart_link.addEventListener('click', function () {
     // Скрываем содержимое <html>
     document.body.innerHTML = '';
     
-    loadPage('cart.html');
+    loadPage('https://elijahtp.github.io/fitbaker.spb/cart.html');
 
       
 
