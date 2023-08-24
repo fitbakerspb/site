@@ -659,6 +659,7 @@ if (window.location.pathname.includes('index.html')) {
 
               const cart_link = document.getElementById("cart");
               const home_link = document.getElementById("container_path_img_home");
+              
             //});
 
           })
