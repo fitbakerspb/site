@@ -145,23 +145,22 @@ const cart_link = document.getElementById("cart");
 //console.log(pageContent_cart);
 
 function loadPage(pageUrl) {
-        
+
   const xhr = new XMLHttpRequest();
   const pageContainer_cart = document.createElement('div');
+
+
   pageContainer_cart.id = 'pageContainer_cart';
   document.body.appendChild(pageContainer_cart);
-  
+
   xhr.onload = function() {
       if (xhr.status === 200) {
-          const tempDiv = document.createElement('div');
-          tempDiv.innerHTML = xhr.responseText;
-          const bodyContent = tempDiv.querySelector('body').innerHTML;
-      
+
           // Помещаем содержимое <body> в контейнер
-          pageContainer_cart.innerHTML = bodyContent;
+          pageContainer_cart.innerHTML = xhr.responseText;
       }
   };
-  
+
   xhr.open('GET', pageUrl, true);
   xhr.send();
 }
