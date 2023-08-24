@@ -570,10 +570,85 @@ if (window.location.pathname.includes('index.html')) {
       container.addEventListener('click', function() {
           const productId = container.dataset.productId;
           //window.location.href = `product-details.html?id=${productId}`;
-          loadPage('product-details.html', function() {})
+          loadPage('product-details.html', function() {
+
+            // Добавляем функционал для перелистывания фотографий
+            let currentIndex = 0;
+
+            // Находим товар с соответствующим идентификатором
+            const product = products.find(item => item.id === productId);
+
+            const carousel = document.querySelector('.product-carousel');
+            // Функция для отображения фотографий товара
+            function showImages(currentIndex) {
+
+              carousel.innerHTML = '';
+              const imgElement = document.createElement('img');
+              imgElement.src = product.images[currentIndex];
+              imgElement.alt = 'Фото товара';
+              carousel.appendChild(imgElement);
+
+            }
+
+            // Функция для отображения описания товара
+            function showPath() {
+              const pathContainer = document.querySelector('#container-carousel-path');
+              pathContainer.insertAdjacentHTML('beforeend',`<h2 class=h_style_path>/ Торты п/п / ${product.name}</h2>`);
+            }
+
+            function showTitle() {
+              const titleContainer = document.querySelector('#container-carousel-title');
+              titleContainer.insertAdjacentHTML('beforeend',`<h2 class="h_style_title">${product.name}</h2>`);
+            }
 
 
+            function showDescription() {
+              const descriptionContainer = document.querySelector('#product-description');
+              descriptionContainer.insertAdjacentHTML('beforeend',`<pre class="p-title-carousel">${product.description}</pre>`);
+            }
 
+
+            function showPrice() {
+              const priceContainer = document.querySelector('#product-buttons-container-order');
+              priceContainer.insertAdjacentHTML('beforeend',`<p class="p-price">${product.price} руб.</p>
+                <button class="btn_order btn" id="btn${product.id}" data-item-id="${product.id}">В корзину</button>
+                <span class=product_in_cart_amount id="${product.id}" style="display: none;"></span>
+                <img class=cartPlus src="img/cart+.png"></img>`);
+            }
+
+
+            function prevImage() {
+                currentIndex = (currentIndex - 1 + product.images.length) % product.images.length;
+
+                showImages(currentIndex);
+            }
+
+            function nextImage() {
+                currentIndex = (currentIndex + 1) % product.images.length;
+
+                showImages(currentIndex);
+
+            }
+
+            // Добавление элементов в контейнер carousel
+            document.addEventListener('DOMContentLoaded', function() {
+
+              const prevButton = createButton('←', 'prev-button', prevImage);
+              carousel.appendChild(prevButton);
+
+              const nextButton = createButton('→', 'next-button', nextImage);
+              carousel.appendChild(nextButton);
+
+              showPath();
+              showTitle();
+              showImages(currentIndex);
+              showDescription();
+              showPrice();
+              showCart();
+              getOrderButtons()
+            });
+
+          })
 
       });
   });
