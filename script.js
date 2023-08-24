@@ -270,8 +270,20 @@ cart_link.addEventListener('click', function () {
       p.innerText = '${tg.initDataUnsafe.user.first_name}${tg.initDataUnsafe.user.last_name}';
       usercard.appendChild(p);
     });
+    const cart_link = document.getElementById("cart");
+    const home_link = document.getElementById("container_path_img_home");
 
 });
+
+
+
+home_link.addEventListener('click', function () {
+  current_page = 'home';
+  
+  loadPage('index.html', function() {});
+});
+
+
 
 if (window.location.pathname.includes('cart.html')) {
 
@@ -644,6 +656,9 @@ if (window.location.pathname.includes('index.html')) {
               showPrice();
               showCart();
               getOrderButtons()
+
+              const cart_link = document.getElementById("cart");
+              const home_link = document.getElementById("container_path_img_home");
             //});
 
           })
