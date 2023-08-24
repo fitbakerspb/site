@@ -560,22 +560,23 @@ if (window.location.pathname.includes('index.html')) {
   };
 
   const detailsButtons = document.querySelectorAll('.image-text-container');
-  console.log('detailsButtons');
-  console.log(detailsButtons);
+
   detailsButtons.forEach(container => {
       container.addEventListener('click', function() {
           const productId = container.dataset.productId;
           //window.location.href = `product-details.html?id=${productId}`;
           loadPage('product-details.html', function() {
-            console.log('loading started');
+            
 
             // Добавляем функционал для перелистывания фотографий
             let currentIndex = 0;
 
             // Находим товар с соответствующим идентификатором
             const product = products.find(item => item.id === productId);
+            
 
             const carousel = document.querySelector('.product-carousel');
+            
             // Функция для отображения фотографий товара
             function showImages(currentIndex) {
 
@@ -628,7 +629,7 @@ if (window.location.pathname.includes('index.html')) {
             }
 
             // Добавление элементов в контейнер carousel
-            document.addEventListener('DOMContentLoaded', function() {
+            //document.addEventListener('DOMContentLoaded', function() {
 
               const prevButton = createButton('←', 'prev-button', prevImage);
               carousel.appendChild(prevButton);
@@ -643,7 +644,7 @@ if (window.location.pathname.includes('index.html')) {
               showPrice();
               showCart();
               getOrderButtons()
-            });
+            //});
 
           })
 
