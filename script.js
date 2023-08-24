@@ -276,12 +276,15 @@ cart_link.addEventListener('click', function () {
 });
 
 
+const home_link = document.getElementById("container_path_img_home");
+if (home_link) {
 
-home_link.addEventListener('click', function () {
-  current_page = 'home';
-  
-  loadPage('index.html', function() {});
-});
+  home_link.addEventListener('click', function () {
+    current_page = 'home';
+
+    loadPage('index.html', function() {});
+  })
+};
 
 
 
@@ -659,7 +662,7 @@ if (window.location.pathname.includes('index.html')) {
 
               const cart_link = document.getElementById("cart");
               const home_link = document.getElementById("container_path_img_home");
-              
+
             //});
 
           })
