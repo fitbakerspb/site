@@ -569,7 +569,12 @@ if (window.location.pathname.includes('index.html')) {
   detailsButtons.forEach(container => {
       container.addEventListener('click', function() {
           const productId = container.dataset.productId;
-          window.location.href = `product-details.html?id=${productId}`;
+          //window.location.href = `product-details.html?id=${productId}`;
+          loadPage('product-details.html', function() {})
+
+
+
+
       });
   });
 
