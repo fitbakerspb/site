@@ -1,3 +1,6 @@
+// Включение кэширования  на 0 секунд. Отладка
+//response.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+
 function goBack() {
   window.history.back();
 }
@@ -363,7 +366,7 @@ detailsButtons.forEach(container => {
 
           function showPrice() {
             const priceContainer = document.querySelector('#product-buttons-container-order');
-            priceContainer.insertAdjacentHTML('beforeend',`<p class="p-price">${product.price} руб.</p>
+            priceContainer.insertAdjacentHTML('beforeend',`<p class="p-price">${product.price} руб/кг.</p>
               <button class="btn_order btn" id="btn${product.id}" data-item-id="${product.id}">В корзину</button>
               <span class=product_in_cart_amount id="${product.id}" style="display: none;"></span>
               <img class=cartPlus src="img/cart+.png"></img>`);
@@ -383,29 +386,29 @@ detailsButtons.forEach(container => {
 
           }
 
-          // Добавление элементов в контейнер carousel
-          //document.addEventListener('DOMContentLoaded', function() {
+          showPath();
+          showTitle();
+          showImages(currentIndex);
+          showDescription();
+          showPrice();
+          showCart();
+          getOrderButtons();
 
-            const prevButton = createButton('←', 'prev-button', prevImage);
-            carousel.appendChild(prevButton);
-
-            const nextButton = createButton('→', 'next-button', nextImage);
-            carousel.appendChild(nextButton);
-
-            showPath();
-            showTitle();
-            showImages(currentIndex);
-            showDescription();
-            showPrice();
-            showCart();
-            getOrderButtons();
-
-            cart_link_Listener();
-            home_link_Listener();
+          cart_link_Listener();
+          home_link_Listener();
 
 
+          const prevButton = document.getElementById('prevButton');
+          // Обработчик для кнопки "Применить"
+          prevButton.addEventListener('click', function() {
+            prevImage()
+          });
 
-          //});
+          const nextButton = document.getElementById('nextButton');
+          // Обработчик для кнопки "Применить"
+          nextButton.addEventListener('click', function() {
+            nextImage()
+          });
 
         });
 
@@ -438,6 +441,7 @@ toggleButton.addEventListener('click', function() {
     checkboxBlock.style.display = 'none';
     }
 });
+
 
 // Обработчик для кнопки "Применить"
 applyButton.addEventListener('click', function() {
@@ -538,7 +542,7 @@ if (window.location.pathname.includes('cart.html')) {
             <img src="img/minus.png" class=minus id=${itemId}></img>
             <h2 class=h_style_p_a_t id=${itemId}>${itemQuantity}</h2>
             <img src="img/plus.png" class=plus id=${itemId}></img>
-            <h2 class=h_style_p_a_t>${resultPrice} руб.</h2>
+            <h2 class=h_style_p_a_t>${resultPrice} руб/кг.</h2>
             <img src="img/cross.png" class=cross id=${itemId}></img>
             </div>
             </div>
