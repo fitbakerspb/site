@@ -1080,7 +1080,7 @@ body {
     flex-direction: column; /* Элементы располагаются вертикально */
     align-items: center; /* Центрируем элементы по вертикали */
     /*width: 96%;*/
-    aspect-ratio: 0.8;
+    aspect-ratio: 0.78;
 
     /*height: 280px;*/
     cursor: pointer;
