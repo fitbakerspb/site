@@ -1,13 +1,5 @@
 /* Объявление CSS переменной */
 :root {
-
-    /*--button-categories-background-color: linear-gradient(to right, red 20%, yellow 50%, green 80%);*/
-
-    /*color for header:*/
-    /*--background-color: linear-gradient(to right, rgb(203, 164, 164), rgb(161, 109, 129), rgb(126, 78, 130));*/
-    /*--background-color: rgb(253, 247, 247);
-    /*--background-color: linear-gradient(to right, rgb(253, 221, 221),rgb(255, 239, 239));*/
-    /* --background-color: linear-gradient(to right, #FFA8B2, #6D9CB3);*/
     --background-color: #a39e9e;
     --header-color: #ffa8b2;
 
@@ -60,11 +52,6 @@
   }
 
   @font-face {
-    font-family: 'Montserrat-Regular'; /* Название для использования шрифта */
-    src: url('fonts/Montserrat/Montserrat-Regular.ttf') format('truetype'); /* Путь к файлу шрифта */
-  }
-
-  @font-face {
     font-family: 'AmaticSC-Regular'; /* Название для использования шрифта */
     src: url('fonts/AmaticSC/AmaticSC-Regular.ttf') format('truetype'); /* Путь к файлу шрифта */
   }
@@ -82,8 +69,6 @@ body {
 
     color: var(--tg-theme-text-color);
     background: var(--tg-theme-bg-color);
-    font-family: Montserrat;
-
 
 }
 
@@ -1329,16 +1314,6 @@ var(--tg-theme-button-text-color)
     font-family: 'PFDinDisplayProLight';
 
 }
-
-
-
-
-
-
-
-
-
-
 
 
 .cart-container {
