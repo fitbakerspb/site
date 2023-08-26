@@ -1,6 +1,6 @@
 // Включение кэширования  на 0 секунд. Отладка
 //response.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-//localStorage.clear();
+localStorage.clear();
 function goBack() {
   window.history.back();
 }
