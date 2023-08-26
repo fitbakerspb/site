@@ -1,6 +1,6 @@
 // Включение кэширования  на 0 секунд. Отладка
 //response.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-//localStorage.clear();
+localStorage.clear();
 function goBack() {
   window.history.back();
 }
@@ -255,8 +255,13 @@ function loadPage(pageUrl, callback) {
               else {
                   tg.MainButton.setText('Оплатить в телеграм или на сайте??');
                   tg.sendData(resultPriceTotal_localStorage);
-                  localStorage.setItem('cart',{});
-                  localStorage.setItem('resultPriceTotal',0);
+                  const cart = JSON.parse(localStorage.getItem('cart')) || {};
+                  delete cart;
+                  const resultPriceTotal = JSON.parse(localStorage.getItem('resultPriceTotal')) || {};
+                  delete resultPriceTotal;
+                  tg.sendData(resultPriceTotal_localStorage);
+                  //localStorage.setItem('cart',{});
+                  //localStorage.setItem('resultPriceTotal',0);
                   tg.MainButton.show();
               }
           });
@@ -664,9 +669,13 @@ if (window.location.pathname.includes('cart.html')) {
           }
           else {
               tg.MainButton.setText('Оплатить в телеграм или на сайте??');
+              const cart = JSON.parse(localStorage.getItem('cart')) || {};
+              delete cart;
+              const resultPriceTotal = JSON.parse(localStorage.getItem('resultPriceTotal')) || {};
+              delete resultPriceTotal;
               tg.sendData(resultPriceTotal_localStorage);
-              localStorage.setItem('cart',{});
-              localStorage.setItem('resultPriceTotal',0);
+              //localStorage.setItem('cart',{});
+              //localStorage.setItem('resultPriceTotal',0);
               tg.MainButton.show();
           }
       });
