@@ -696,6 +696,8 @@ function cart_link_Listener() {
 
 
         const btn_order = document.getElementById("makeOrderButton_button");
+        console.log('btn_order');
+        console.log(btn_order);
 
         btn_order.addEventListener("click", function(){
             const resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));

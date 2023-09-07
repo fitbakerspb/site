@@ -1861,19 +1861,19 @@ color: #999;
 
 
 
-.makeOrderButton button[disabled="false"]{
+#makeOrderButton_button[disabled="false"]{
     background: var(--btn-order-color-custom);
     cursor: pointer;
 }
 
-.makeOrderButton button[disabled="true"] {
+#makeOrderButton_button[disabled="true"] {
     background:#a78f8f;
     cursor: not-allowed;
 
 }
 
 
-.makeOrderButton button{
+#makeOrderButton_button{
     position: relative;
     top: 5px;
     left: 4%;
