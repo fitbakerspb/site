@@ -708,12 +708,20 @@ function cart_link_Listener() {
                 tg.MainButton.setText('Оплатить в телеграм или на сайте??');
 
                 const cart = JSON.parse(localStorage.getItem('cart')) || {};
+                console.log('localStorage.getItem');
+                console.log(localStorage.getItem('cart'));
                 delete cart;
+                console.log('localStorage.getItem');
+                console.log(localStorage.getItem('cart'));
+                console.log('cart');
+                console.log(cart);
                 const resultPriceTotal = JSON.parse(localStorage.getItem('resultPriceTotal')) || {};
                 delete resultPriceTotal;
+                console.log('resultPriceTotal_localStorage');
+                console.log(resultPriceTotal_localStorage);
                 tg.sendData(resultPriceTotal_localStorage);
-                //localStorage.setItem('cart',{});
-                //localStorage.setItem('resultPriceTotal',0);
+                localStorage.setItem('cart',{});
+                localStorage.setItem('resultPriceTotal',0);
                 tg.MainButton.show();
             }
         });
@@ -744,8 +752,8 @@ function home_link_Listener() {
 
     home_link.addEventListener('click', function () {
       current_page = 'home';
-      window.location.reload();
-      //loadPage('index.html', function() {});
+      //window.location.reload();
+      loadPage('index.html', function() {});
       showCartAmount();
       listenerCheckboxChange();
 
@@ -754,7 +762,6 @@ function home_link_Listener() {
 };
 
 document.addEventListener('DOMContentLoaded', function() {
-  localStorage.clear();
   updateVisibleItemCount();
   getOrderButtons()
   showProductInCart();
