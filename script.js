@@ -59,10 +59,7 @@ window.addEventListener('scroll', function() {
 localStorage.setItem('products', JSON.stringify(products));
 
 
-let tg = window.Telegram.WebApp;
-tg.expand();
-tg.MainButton.textColor = "#FFFFFF";
-tg.MainButton.color = "#f5919b";
+
 
 function assignCategory() {
   // Получаем все контейнеры с товарами
@@ -691,7 +688,10 @@ function cart_link_Listener() {
         //saveSelectedOptions();
 
 
-
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+        tg.MainButton.textColor = "#FFFFFF";
+        tg.MainButton.color = "#f5919b";
 
 
 
@@ -706,7 +706,7 @@ function cart_link_Listener() {
             }
             else {
                 tg.MainButton.setText('Оплатить в телеграм или на сайте??');
-                tg.sendData(resultPriceTotal_localStorage);
+
                 const cart = JSON.parse(localStorage.getItem('cart')) || {};
                 delete cart;
                 const resultPriceTotal = JSON.parse(localStorage.getItem('resultPriceTotal')) || {};
