@@ -1,48 +1,18 @@
-// Включение кэширования  на 0 секунд. Отладка
-//response.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-//localStorage.clear();
-function goBack() {
-  window.history.back();
-}
-let current_page = "index";
-localStorage.setItem('current_page',  JSON.stringify(current_page));
-
-
-
-const header = document.querySelector('.header');
-let lastScrollTop = 0;
-
-window.addEventListener('scroll', function() {
-  const scrollTop = window.scrollY;
-
-  if (scrollTop > lastScrollTop) {
-    // Прокрутка вниз
-    header.style.transform = 'translateY(-100%)';
-  } else {
-    // Прокрутка вверх
-    header.style.transform = 'translateY(0)';
-  }
-
-  lastScrollTop = scrollTop;
-});
-
-// Получаем параметр id из URL
-//const urlParams = new URLSearchParams(window.location.search);
-//const productId = urlParams.get('id');
-
 //Массивы с информацией о товарах
 const products = [
-  {id: '1',name: '«Морковный» торт с фундучным пралине и грушевым компоте', images: ['photos/1_1.jpg','photos/1_2.jpg'],description: 'Бисквитный торт приготовлен без муки и без сахара🎂🔥\nКбжу на 100 гр 141/8/8/10\nСостав:\n🍰Ароматный морковный бисквит\n🍰Цитрусовый крем \n🍰Грушевое компоте \n🍰Невероятно вкусное фундучное пралине',weight: '1,5кг',price: '2000',categories: ['классика','п/п торты'],options1: ['без начинки']},
+  {id: '1',name: '«Морковный» торт с фундучным пралине и грушевым компоте', images: ['photos/1_1.jpg','photos/1_2.jpg'],description: 'Бисквитный торт приготовлен без муки и без сахара🎂🔥\nКбжу на 100 гр 141/8/8/10\nСостав:\n🍰Ароматный морковный бисквит\n🍰Цитрусовый крем \n🍰Грушевое компоте \n🍰Невероятно вкусное фундучное пралине',weight: '1,5кг',price: '2000',categories: ['п/п торты'],options1: ['без начинки']},
   {id: '2',name: '«Шварцвальдский» с вишней',images: ['photos/2_1.jpg','photos/2_2.jpg'],description: 'Вес ~ 1,8 кг 🔥\n\nКБЖУ на 100 грамм всего - 180/10/10/12.5 ❤️‍🔥',price: '2000',categories: ['классика','п/п торты'],options1: ['без начинки','карамель','цитрусовый курд','вишня','лимон']},
   {id: '3',name: '«Рафаэлло»',images: ['photos/3_1.jpg','photos/3_2.jpg'],description: 'Кбжу на 100 грамм 192/10/12/15\nСостав: \n🥥Нежные и сочные кокосовые коржи\n🥥Кокосовый крем \n🥥Начинка из карамелизованого хрустящего миндаля',price: '1000',categories: ['классика','п/п торты'],options1: ['без начинки','карамель','цитрусовый курд','вишня','лимон']},
   {id: '4',name: '«Вишня-кокос» с чизкейком внутри',images: ['photos/4_1.jpg','photos/4_2.jpg'],description: 'Кбжу на 100 гр.: 167/10/11,2/6,4\nСостав:\n🍰Ароматный кокосовый бисквит\n🍰Сочный вишневый соус \n🍰Нежный кокосовый чизкейк \n🍰Крем с нотками кокоса',price: '2000',categories: ['классика','п/п торты'],options1: ['без начинки','карамель','цитрусовый курд','вишня','лимон']},
 ];
-const categories = [
+
+const selectOptions_default = [{'select_1': 1,'select_2': '1', 'select_3': '1'}];
+const selectOptions_categories = [
   {id: '1',name: 'п/п торты', price: '2000'},
   {id: '2',name: 'классика', price: '1800'}
   ];
 
-const weights = [
+  const selectOptions_weights = [
   {id: '1', weight: '1.5'},
   {id: '2', weight: '2'},
   {id: '3', weight: '2.5'},
@@ -63,22 +33,36 @@ const weights = [
   {id: '18', weight: '10'},
 ];
 
+function goBack() {
+  window.history.back();
+}
+let current_page = "index";
+localStorage.setItem('current_page',  JSON.stringify(current_page));
 
+const header = document.querySelector('.header');
+let lastScrollTop = 0;
 
-const defaultSelectOptions = {'select_1': '1','select_2': '1', 'select_3': '1'};
+window.addEventListener('scroll', function() {
+  const scrollTop = window.scrollY;
 
+  if (scrollTop > lastScrollTop) {
+    // Прокрутка вниз
+    header.style.transform = 'translateY(-100%)';
+  } else {
+    // Прокрутка вверх
+    header.style.transform = 'translateY(0)';
+  }
+
+  lastScrollTop = scrollTop;
+});
 
 localStorage.setItem('products', JSON.stringify(products));
 
 
-
 let tg = window.Telegram.WebApp;
-
 tg.expand();
-
 tg.MainButton.textColor = "#FFFFFF";
 tg.MainButton.color = "#f5919b";
-
 
 function assignCategory() {
   // Получаем все контейнеры с товарами
@@ -88,10 +72,28 @@ function assignCategory() {
     const itemProductId = itemElement.getAttribute('data-product-id');
     const product = products.find(product => product.id === itemProductId);
     if (product) {
-      itemElement.setAttribute('data-category', product.categories.join(', '));
+      itemElement.setAttribute('data-category', product.categories.join(','));
     }
       });
 }
+
+function assignCheckboxBlocks() {
+  // Получаем все контейнеры с товарами
+  const cb_item = document.querySelector('.cb_items_div');
+
+
+
+
+  cb_item.insertAdjacentHTML('beforeend',`<div class="cb_item">
+  <input type="checkbox" id="checkbox1" name="category" value="all" onchange="handleCheckboxChange(this)">
+  <label for="checkbox1">все торты</label><br>
+  </div>${selectOptions_categories.map((option_value, index) => `<div class="cb_item">
+  <input type="checkbox" id="checkbox${index + 2}" name="category" value="${option_value.name}" onchange="handleCheckboxChange(this)">
+  <label for="checkbox${index + 2}">${option_value.name}</label><br>
+  </div>`).join('')}`);
+};
+
+
 
 
 function showProductInCart() {
@@ -152,7 +154,7 @@ function getOrderButtons() {
         cart[itemId] += itemQuantity;
       } else {
         cart[itemId] = 1;
-        selectOption[itemId] = defaultSelectOptions
+        selectOption[itemId] = selectOptions_default[0]
 
       }
 
@@ -210,20 +212,57 @@ function showCartContainer() {
         <img src=${cartProduct.images[0]}></img>
         <div>
           <h2 class="h_style_cart">${cartProduct.name}</h2>
+
+        </div>
+      </div>
+
+
+
+
+
+      <div class=select-options>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div>
+          <h2 class="h_style_p_a_t">Количество:</h2>
+
+
           <div class=price-amount-total>
             <div>
-              <img src="img/minus.png" class=minus id=${itemId}></img>
+              <img src="img/minus.png" class=minus_amount id=${itemId}></img>
               <h2 class=h_style_p_a_t id=itemQuantity></h2>
-              <img src="img/plus.png" class=plus id=${itemId}></img>
+              <img src="img/plus.png" class=plus_amount id=${itemId}></img>
+              <h2 class="h_style_p_a_t">Стоимость:</h2>
               <h2 class=h_style_p_a_t id=resultPrice></h2>
-              <img src="img/cross.png" class=cross id=${itemId}></img>
+              <img src="img/cross.png" class=cross_amount id=${itemId}></img>
             </div>
           </div>
         </div>
-      </div>
-      <div class=select-options>
-      <div>
-          <h2 class="h_style_p_a_t">Выберите вес: </h2>
+
+        <div>
+          <h2 class="h_style_p_a_t">Вес: </h2>
+          <div id=weightSelect class=weightSelect>
+            <div>
+
+
+              <img src="img/minus_light.png" class=minus_weight id=${itemId}></img>
+              <img src="img/plus_light.png" class=plus_weight id=${itemId}></img>
+
+
+            </div>
+          </div>
+
           <select class="selectoptions" id="select_1" size="1">
             <option value="1">1.5 кг</option>
             <option value="2">2 кг</option>
@@ -243,14 +282,20 @@ function showCartContainer() {
             <option value="16">9 кг</option>
             <option value="17">9.5 кг</option>
             <option value="18">10 кг</option>
-            </select>
+          </select>
         </div>
-      <div>
-          <h2 class="h_style_p_a_t">Выберите тип: </h2>
+
+
+
+
+
+
+        <div>
+          <h2 class="h_style_p_a_t">Тип: </h2>
           <select class="selectoptions" id="select_2" size="1"><option value="1">П/п торт (2000 руб / кг)</option><option value="2">Классический торт (1800руб. / кг)</option></select>
         </div>
         <div>
-          <h2 class="h_style_p_a_t">Выберите начинку: </h2>
+          <h2 class="h_style_p_a_t">Начинка: </h2>
           <select class="selectoptions" id="select_3" size="1">
           ${cartProduct.options1.map((option_value, index) => `<option value="${index + 1}">${option_value}</option>`).join('')}
           </select>
@@ -279,44 +324,68 @@ function showCartContainer_itemQuantity_resultPrice() {
   const cartItem = document.querySelector('#cartContainer');
   //cartItem.innerHTML = '';
   const makeOrder = document.querySelector('#makeOrder');
+
+  const itemDelivery = document.querySelector('#delivery');
+  const itemInfocart = document.querySelector('#infocart');
+  const btn_order = document.querySelector('#makeOrderButton_button');
+
+
   //let optionsDataCategory = '1';
+  let resultPrice = 0;
   let resultPriceTotal = 0;
   // Выводим данные в корзине на странице cart.html
   for (const itemId in cartData) {
     const cartItem_itemId = cartItem.querySelector(`.cartContainer[id="${itemId}"]`);
-    console.log('cartItem_itemId');
-    console.log(cartItem_itemId);
     const itemQuantity = cartData[itemId];
-    const optionsDataCategory = optionsData[itemId]['select_2']
-    const optionsDataWeight = optionsData[itemId]['select_1']
+    const optionsDataCategory = optionsData[itemId]['select_2'];
+    const optionsDataWeight = parseInt(optionsData[itemId]['select_1'],10);
 
     // Находим товар с соответствующим идентификатором
     const cartProduct = products.find(item => item.id === itemId);
 
     // Находим стоимость торта на кг в зависимости от выбранной категории
-    const priceProduct = categories.find(item => item.id === optionsDataCategory);
+    const priceProduct = selectOptions_categories.find(item => item.id === optionsDataCategory);
 
     // Находим вес торта в зависимости от выбранной категории
-    const weightProduct = weights.find(item => item.id === optionsDataWeight);
-
+    //const weightProduct = selectOptions_weights.find(item => item.id === optionsDataWeight);
 
     const priceProductValue = priceProduct['price'];
-    const weightProductValue = weightProduct['weight'];
+    //const weightProductValue = weightProduct['weight'];
 
-    const resultPrice = itemQuantity*priceProductValue*weightProductValue;
+    const weightValue = 1 + optionsDataWeight*0.5;
+
+    const resultPrice = itemQuantity*priceProductValue*weightValue ;
 
 
     //const h2_itemQuantity = cartItem.querySelector(`#itemQuantity[id="${itemId}"]`);
     const h2_itemQuantity = cartItem_itemId.querySelector('#itemQuantity');
     const h2_resultPrice = cartItem_itemId.querySelector('#resultPrice');
+    //const h2_weightValue = cartItem_itemId.querySelector('#h2_weight');
+
     const h2_makeOrder = makeOrder.querySelector('#h2_makeOrder');
+
+
     h2_itemQuantity.textContent = `${itemQuantity}`;
-    h2_resultPrice.textContent = `${resultPrice}`;
+    h2_resultPrice.textContent = `${resultPrice} руб.`;
+    //h2_weightValue.textContent = `${weightValue} кг.`;
     resultPriceTotal += resultPrice;
   };
+
   localStorage.setItem('resultPriceTotal', JSON.stringify(resultPriceTotal));
   //h2_makeOrder.textContent = `Стоимость заказа: <span><b>${resultPriceTotal}</b></span> руб.`;
   //makeOrder.insertAdjacentHTML('beforeend',`<h2 class=h_style_makeOrder>Стоимость заказа: <span><b>${resultPriceTotal}</b></span> руб.</h2>`);
+
+  if (resultPriceTotal === 0){
+    itemDelivery.style.display = 'none';
+    itemInfocart.style.display = 'none';
+    btn_order.setAttribute("disabled", "true");
+  }
+  else {
+    itemDelivery.style.display = 'block';
+    itemInfocart.style.display = 'block';
+    btn_order.setAttribute("disabled", "false");
+    //btn_order.removeAttribute("disabled");
+  }
 
   h2_makeOrder.innerHTML = `<h2 class=h_style_makeOrder>Стоимость заказа: <span><b>${resultPriceTotal}</b></span> руб.</h2>`;
 
@@ -324,9 +393,14 @@ function showCartContainer_itemQuantity_resultPrice() {
 
 
 
+
+
+
 function listenerCartContainer() {
 
   const cartData = JSON.parse(localStorage.getItem('cart'));
+
+
   //const optionsData = JSON.parse(localStorage.getItem('selectOption'));
 
   //const cartItem = document.querySelector('#cartContainer');
@@ -337,8 +411,8 @@ function listenerCartContainer() {
   // Выводим данные в корзине на странице cart.html
 
 
-  const minus_block = document.querySelectorAll('.minus');
-  minus_block.forEach(button => {
+  const minus_amount_block = document.querySelectorAll('.minus_amount');
+  minus_amount_block.forEach(button => {
     button.addEventListener('click', function() {
       const itemId = this.id; // Получаем id товара из data-атрибута
       const itemQuantity = 1; // Предполагаем, что всегда заказывается 1 штука
@@ -375,8 +449,8 @@ function listenerCartContainer() {
     });
   });
 
-  const plus_block = document.querySelectorAll('.plus');
-  document.querySelectorAll('.plus').forEach(button => {
+  const plus_amount_block = document.querySelectorAll('.plus_amount');
+  plus_amount_block.forEach(button => {
     button.addEventListener('click', function() {
       const itemId = this.id; // Получаем id товара из data-атрибута
       const itemQuantity = 1; // Предполагаем, что всегда заказывается 1 штука
@@ -395,8 +469,8 @@ function listenerCartContainer() {
     });
   });
 
-  const cross_block = document.querySelectorAll('.cross');
-  document.querySelectorAll('.cross').forEach(button => {
+  const cross_amount_block = document.querySelectorAll('.cross_amount');
+  cross_amount_block.forEach(button => {
     button.addEventListener('click', function() {
       const itemId = this.id; // Получаем id товара из data-атрибута
       // Проверяем, есть ли уже товар в корзине
@@ -419,6 +493,63 @@ function listenerCartContainer() {
 
 }
 
+function listenerWeightSelect() {
+
+
+
+  //const cartItem = document.querySelector('#cartContainer');
+  //cartItem.innerHTML = '';
+  //const makeOrder = document.querySelector('#makeOrder');
+  //let optionsDataCategory = '1';
+  //let resultPriceTotal = 0;
+  // Выводим данные в корзине на странице cart.html
+
+  const minus_weight_block = document.querySelectorAll('.minus_weight');
+  minus_weight_block.forEach(button => {
+    button.addEventListener('click', function() {
+        const optionsData = JSON.parse(localStorage.getItem('selectOption'));
+        const itemId = this.id; // Получаем id товара из data-атрибута
+        const itemQuantity = 1;
+        if (parseInt(optionsData[itemId]['select_1'],10) === 1) {
+        } else {
+          let minus_weight_value = parseInt(optionsData[itemId]['select_1'],10)
+          minus_weight_value -= itemQuantity;
+          optionsData[itemId]['select_1'] = minus_weight_value
+
+          localStorage.setItem('selectOption', JSON.stringify(optionsData));
+
+          const selectOptionsBlock = this.closest('.select-options');
+          const select1Block = selectOptionsBlock.querySelector(`.selectoptions[id="select_1"]`);
+          select1Block.value = minus_weight_value
+        };
+        localStorage.setItem('selectOption', JSON.stringify(optionsData));
+
+      });
+    });
+
+  const plus_weight_block = document.querySelectorAll('.plus_weight');
+  plus_weight_block.forEach(button => {
+    button.addEventListener('click', function() {
+        const optionsData = JSON.parse(localStorage.getItem('selectOption'));
+        const itemId = this.id; // Получаем id товара из data-атрибута
+        const itemQuantity = 1;
+        if (parseInt(optionsData[itemId]['select_1'],10) === 18) {
+        }
+        else {
+          let plus_weight_value = parseInt(optionsData[itemId]['select_1'],10)
+          plus_weight_value += itemQuantity;
+          optionsData[itemId]['select_1'] = plus_weight_value
+
+          const selectOptionsBlock = this.closest('.select-options');
+          const select1Block = selectOptionsBlock.querySelector(`.selectoptions[id="select_1"]`);
+          select1Block.value = plus_weight_value
+        }
+        localStorage.setItem('selectOption', JSON.stringify(optionsData));
+
+        showCartContainer_itemQuantity_resultPrice();
+    });
+  });
+}
 
 
 function loadPage(pageUrl, callback) {
@@ -533,12 +664,6 @@ function loadSelectedOptions() {
 
 };
 
-
-
-
-
-
-
 function cart_link_Listener() {
 
   cart_link = document.getElementById("cart");
@@ -554,7 +679,14 @@ function cart_link_Listener() {
         showCartAmount();
         showCartContainer_itemQuantity_resultPrice();
         listenerCartContainer();
+        listenerWeightSelect()
         loadSelectedOptions();
+
+        saveRadioChange();
+        listenerRadioChange();
+
+        setMinData ()
+
 
         //saveSelectedOptions();
 
@@ -599,6 +731,7 @@ function cart_link_Listener() {
         //window.location.reload();
         cart_link_Listener();
         home_link_Listener();
+
       });
 
 
@@ -614,27 +747,20 @@ function home_link_Listener() {
       window.location.reload();
       //loadPage('index.html', function() {});
       showCartAmount();
-      console.log('showCartAmount()');
-      console.log(showCartAmount());
+      listenerCheckboxChange();
+
     })
   };
 };
-
-
-
-
-
-
-
-
-
 
 document.addEventListener('DOMContentLoaded', function() {
   updateVisibleItemCount();
   getOrderButtons()
   showProductInCart();
   assignCategory();
+  assignCheckboxBlocks();
   showCartAmount();
+  listenerCheckboxChange();
   cart_link_Listener();
   home_link_Listener();
 
@@ -656,8 +782,8 @@ function updateVisibleItemCount() {
   }
 };
 
-if (JSON.parse(localStorage.getItem('current_page')) === 'index') {
-
+//if (JSON.parse(localStorage.getItem('current_page')) === 'index') {
+function product_details_link_Listener() {
   const detailsButtons = document.querySelectorAll('.image-text-container');
 
   detailsButtons.forEach(container => {
@@ -741,23 +867,25 @@ if (JSON.parse(localStorage.getItem('current_page')) === 'index') {
 
 
             const prevButton = document.getElementById('prevButton');
-            // Обработчик для кнопки "Применить"
+            // Обработчик для кнопки "Предыдущая фотография"
             prevButton.addEventListener('click', function() {
               prevImage()
             });
 
             const nextButton = document.getElementById('nextButton');
-            // Обработчик для кнопки "Применить"
+            // Обработчик для кнопки "Следующая фотография"
             nextButton.addEventListener('click', function() {
               nextImage()
             });
 
           });
 
-
       });
   });
 
+};
+
+function listenerCheckboxChange() {
 
   const paragraphs = document.querySelectorAll('.p_cat');
   paragraphs.forEach(paragraph => {
@@ -770,9 +898,9 @@ if (JSON.parse(localStorage.getItem('current_page')) === 'index') {
   });
 
   // Получаем элементы кнопок и блока с чекбоксами
-  const toggleButton = document.getElementById('toggleButton');
-  const checkboxBlock = document.getElementById('checkboxBlock');
-  const applyButton = document.getElementById('applyButton');
+  const toggleButton = document.getElementById('toggleButton') || {};
+  const checkboxBlock = document.getElementById('checkboxBlock') || {};
+  const applyButton = document.getElementById('applyButton') || {};
 
   // Обработчик для кнопки "Показать список"
   toggleButton.addEventListener('click', function() {
@@ -793,6 +921,8 @@ if (JSON.parse(localStorage.getItem('current_page')) === 'index') {
       const selectedValues = [];
       selectedCheckboxes.forEach(checkbox => {
         selectedValues.push(checkbox.value);
+        console.log('selectedValues');
+        console.log(selectedValues);
     });
       if (selectedValues.length > 0) {
         filterByCategory(selectedValues);
@@ -802,10 +932,13 @@ if (JSON.parse(localStorage.getItem('current_page')) === 'index') {
         filterByCategory(["all"]); // Передаем "all" в массиве, чтобы соответствовать ожидаемому типу аргумента функции
         updateVisibleItemCount();
 
-    }
+    };
 
   });
-}
+};
+
+
+
 function handleCheckboxChange(checkbox) {
     const checkboxes = document.querySelectorAll('#checkboxBlock input[name="category"]');
 
@@ -836,5 +969,94 @@ function filterByCategory(selectedValues) {
                 product.style.display = 'none';
             }
         });
-}
+};
 
+
+
+
+
+// Функция для изменения цвета фона и записи в localStorage
+function handleRadioChange(event) {
+  // Получаем все радиокнопки и соответствующие им label
+  const radioButtons = document.querySelectorAll('input[type="radio"]');
+  const labels = document.querySelectorAll('label');
+  const selectedValue = event.target.value;
+
+  // Устанавливаем цвет фона для всех label
+  labels.forEach((label) => {
+    label.classList.remove('selected'); // Снимаем класс 'selected' со всех label
+    label.classList.add('unselected');
+  });
+
+  // Находим label, который соответствует выбранной радиокнопке и добавляем класс 'selected'
+  const correspondingLabel = document.querySelector(`label[value="${event.target.value}"]`);
+  correspondingLabel.classList.add('selected');
+  correspondingLabel.classList.remove('unselected');
+
+  // Записываем выбранное значение в localStorage
+  localStorage.setItem('delivery', selectedValue);
+  listenerRadioChange();
+
+
+};
+
+
+function listenerRadioChange() {
+  const radioButtons = document.querySelectorAll('input[type="radio"]');
+  // Добавляем обработчик события для каждой радиокнопки
+  radioButtons.forEach((radioButton) => {
+    radioButton.addEventListener('change', handleRadioChange);
+  });
+}
+// Функция для изменения цвета фона и записи в localStorage
+function saveRadioChange() {
+// При загрузке страницы, проверяем, есть ли сохраненное значение в localStorage
+const savedDelivery = localStorage.getItem('delivery');
+if (savedDelivery) {
+  // Если есть, выбираем соответствующую радиокнопку и вызываем событие change
+
+  const selectedRadioButton_label = document.querySelector(`label[value="${savedDelivery}"]`);
+  const selectedRadioButton_input = document.querySelector(`input[value="${savedDelivery}"]`);
+  if (selectedRadioButton_label) {
+    //selectedRadioButton.checked = true;
+    //selectedRadioButton.dispatchEvent(new Event('change'));
+
+
+    const labels = document.querySelector('.delivery').querySelectorAll('label');
+
+
+
+    // Устанавливаем цвет фона для всех label
+    labels.forEach((label) => {
+      label.classList.remove('selected'); // Снимаем класс 'selected' со всех label
+      label.classList.add('unselected');
+      const input = label.querySelector(`input`);
+      input.checked = false;
+    });
+
+    // Находим label, который соответствует выбранной радиокнопке и добавляем класс 'selected'
+    selectedRadioButton_label.classList.remove('unselected');
+    selectedRadioButton_label.classList.add('selected');
+
+    // Устанавливаем атрибут checked у  радио-инпута
+    selectedRadioButton_input.checked = true;
+
+  };
+};
+};
+
+
+function setMinData () {
+  // Получаем текущую дату
+  const currentDate = new Date();
+
+  // Добавляем к текущей дате 3 дня
+  currentDate.setDate(currentDate.getDate() + 5);
+
+  // Форматируем дату в строку YYYY-MM-DD (так, как это ожидает элемент input type="date")
+  const minDate = currentDate.toISOString().split('T')[0];
+
+  // Устанавливаем минимальную дату в элемент input
+  document.getElementById('dataToday').min = minDate;
+  document.getElementById('dataToday').value = minDate;
+};

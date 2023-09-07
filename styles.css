@@ -1437,7 +1437,7 @@ var(--tg-theme-button-text-color)
     width: 17%;
     aspect-ratio: 0.9;
 
-    top: 3px;
+    top: 10px;
 
     display: inline-block;
 
@@ -1490,10 +1490,128 @@ var(--tg-theme-button-text-color)
     text-shadow: 2px 2px 0 #ddd2d3;
 }
 
+.delivery {
+
+
+    padding-bottom: 0px;
+    width: 100%;
+}
+
+.delivery>div{
+    margin-top: 10px;
+    width: 100%;
+    left: 0%;
+    display: flex; /* Используем Flexbox для выравнивания по центру по вертикали */
+
+    flex-direction: column; /* Элементы располагаются вертикально */
 
 
 
 
+
+}
+
+.delivery>div>label{
+    height: 50px;
+    width: 88%;
+    margin-left: 4%;
+    padding-left: 2%;
+    margin-bottom: 10px;
+    border: 1px solid var(--border-color) ;
+    border-radius: 1px;
+
+    display: flex; /* Используем Flexbox для выравнивания по центру по вертикали */
+    justify-content: left; /* Центрируем по горизонтали */
+    align-items: center; /* Центрируем элементы по вертикали */
+    font-family: 'Montserrat-ExtraLight';
+    font-size: 13px;
+    cursor: pointer;
+
+    z-index: 10;
+}
+
+.selected {
+
+    background-color: #e8effb; /* Цвет фона */
+}
+
+.unselected {
+
+    background-color: #f0f0f0; /* Цвет фона */
+}
+
+.infocart {
+    border-bottom: 1px solid var(--border-color) ;
+
+    padding-bottom: 16px;
+    width: 100%;
+}
+
+.infocart>div{
+    margin-top: 10px;
+    width: 100%;
+    left: 0%;
+    display: flex; /* Используем Flexbox для выравнивания по центру по вертикали */
+
+    flex-direction: column; /* Элементы располагаются вертикально */
+}
+
+
+.h_style_infocart {
+    margin-top: 0px;
+    margin-left: 18px;
+    height: 40px;
+    text-align: left;
+
+    }
+
+.h_style_infocart h2{
+
+letter-spacing: 0px;
+font-family: 'Montserrat-ExtraLight';
+
+font-size: 12px;
+color: #020202;
+z-index: 10;
+}
+
+.ireset {
+height: 30px;
+width: 90%;
+margin-left: 4%;
+padding-left: 0%;
+margin-bottom: 10px;
+
+display: flex; /* Используем Flexbox для выравнивания по центру по вертикали */
+justify-content: center; /* Центрируем по горизонтали */
+align-items: center; /* Центрируем элементы по вертикали */
+color: #999;
+}
+
+.ireset input {
+    width: 100%;
+    height: 100%;
+    font-style: italic;
+    border: 1px solid var(--border-color) ;
+    border-radius: 1px;
+
+}
+
+.ireset textarea {
+    width: 100%;
+    margin-top: 10px;
+    height: 50px;
+    font-style: italic;
+    border: 1px solid var(--border-color) ;
+    border-radius: 1px;
+
+}
+
+
+
+.hidden {
+    display: none;
+}
 
 .price-amount-total{
 
@@ -1514,24 +1632,14 @@ var(--tg-theme-button-text-color)
 }
 .price-amount-total div{
     width: 100%;
-
+    margin-left: 2%;
 
     display: flex;
-    justify-content: center;
+    /*justify-content: center;*/
     align-items: center;
     text-align: center;
 
-
-
-
-
-
-
     z-index: 11;
-
-
-
-
 }
 
 .h_style_p_a_t {
@@ -1541,15 +1649,15 @@ var(--tg-theme-button-text-color)
     letter-spacing: 0px;
     font-family: 'Montserrat-ExtraLight';
     font-size: 12px;
-    color: var(--font-color-selector);
+    color: black;
     z-index: 10;
 }
 
 
 .price-amount-total>div>img {
 
-    width: 18px;
-    height: 18px;
+
+    height: 20px;
     margin-top: 0px;
 
     border: none;
@@ -1561,24 +1669,31 @@ var(--tg-theme-button-text-color)
 
 .price-amount-total>div>img:nth-child(1) {
 
-    width:18px;
+    width:20px;
 
 
   }
 
   .price-amount-total>div>h2:nth-child(2) {
-    width:6%;
+    width:5%;
 
 
   }
   .price-amount-total>div>img:nth-child(3) {
-    width:18px;
+    width:20px;
   }
   .price-amount-total>div>h2:nth-child(4) {
-    width:60%;
+    width:35%;
+    text-align: right;
   }
   .price-amount-total>div>h2:nth-child(5) {
-    width:15%
+    margin-left: 3%;
+    width:30%;
+    text-align: left;
+
+  }
+  .price-amount-total>div>img:nth-child(6) {
+    width:20px;
   }
 
 
@@ -1594,7 +1709,7 @@ var(--tg-theme-button-text-color)
     top: 0px;
 
 
-    height: 33px;
+
 
     align-items:center; /* Центрируем элементы по вертикали */
 
@@ -1616,14 +1731,14 @@ var(--tg-theme-button-text-color)
 
 .select-options>div>h2:nth-child(1) {
 
-    width:30%;
+    width:19%;
     margin-left: 4%;
 
 
   }
 
   .select-options>div>select:nth-child(2) {
-    width:64%;
+    width:71%;
     height: 30px;
     background-color: #f0f0f0; /* Цвет фона */
     border: 1px solid #ccc;   /* Прямоугольная рамка */
@@ -1633,6 +1748,80 @@ var(--tg-theme-button-text-color)
     color: black;
     z-index: 10;
   }
+
+
+  .select-options>div>select:nth-child(3) {
+    width:71%;
+    height: 30px;
+    background-color: #f0f0f0; /* Цвет фона */
+    border: 1px solid #ccc;   /* Прямоугольная рамка */
+    letter-spacing: 0px;
+    font-family: 'Montserrat-ExtraLight';
+    font-size: 12px;
+    color: black;
+    z-index: 10;
+  }
+
+
+
+
+
+
+.weightSelect{
+    width:12%;
+    margin-left: -12%;
+    display: inline-block;
+
+
+    position: relative;
+
+    top: 6px;
+
+
+    height: 33px;
+
+    align-items:center; /* Центрируем элементы по вертикали */
+
+}
+
+.weightSelect div{
+    width: 100%;
+
+
+    display: flex;
+    /*justify-content: center;*/
+    align-items: center;
+    text-align: center;
+
+    z-index: 11;
+
+}
+
+
+
+
+
+
+
+
+.weightSelect>div>img {
+
+
+    height: 20px;
+    width: 20px;
+    margin-top: 0px;
+    margin-left: 2px;
+
+    border: none;
+    z-index: 10;
+    cursor: pointer;
+}
+
+
+
+
+
+
 
 
 
@@ -1670,7 +1859,21 @@ var(--tg-theme-button-text-color)
 
 
 
-  .makeOrderButton button{
+
+
+.makeOrderButton button[disabled="false"]{
+    background: var(--btn-order-color-custom);
+    cursor: pointer;
+}
+
+.makeOrderButton button[disabled="true"] {
+    background:#a78f8f;
+    cursor: not-allowed;
+
+}
+
+
+.makeOrderButton button{
     position: relative;
     top: 5px;
     left: 4%;
@@ -1680,18 +1883,12 @@ var(--tg-theme-button-text-color)
 
     text-align: center;
 
-
-
-
-
     border: none;
-    background: var(--btn-order-color-custom);
+
     border-radius: 1px;
     color: #fff;
     margin-bottom: 10px;
     text-transform: uppercase;
-
-
 
     transition: background .2s linear;
 
@@ -1701,6 +1898,8 @@ var(--tg-theme-button-text-color)
 
 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
 
-}
+
+
+};
+

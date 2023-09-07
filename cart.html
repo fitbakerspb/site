@@ -6,16 +6,19 @@
     <title>Подробности о товаре</title>
     <meta name=”viewport” content="user-scalable=no" />
     <link rel="stylesheet" href="styles.css">
+
 </head>
+
 <body>
 
-    <div class="header" id="ertert">
+    <div class="header">
         <div>
             <a class=phone_number href="tel:+79876543210">+7 987 654-32-10</a>
             <img class=cart id="cart" src="img/cart1.png" ></img>
             <span class=cart_amount id="cart_amount" style="display: none;"></span>
         </div>
     </div>
+    <div>
         <!--
         <div class="buttons-back">
             <p class="btn_back" onclick="document.location='index.html'">← Назад</p>
@@ -24,36 +27,98 @@
 
     <div class="cart-container">
 
-        <div class="inner-cart-container">
+      <div class="inner-cart-container">
 
-            <div class="outer-cart-container">
+        <div class="outer-cart-container">
 
-                <div class=cart-container-path>
-                    <div id="cart-container-path">
-                        <img class="cart-container_path_img_home" id=container_path_img_home src="img/home.png"></img>
-                        <!--<img class="cart-container_path_img_home" src="img/home.png" onclick="document.location='index.html'"></img>-->
-                        <h2 class=h_style_path> / Оформление заказа</h2> <!-- Путь будет добавлено динамически из JavaScript -->
-                    </div>
+          <div class=cart-container-path>
+            <div id="cart-container-path">
+              <img class="cart-container_path_img_home" id=container_path_img_home src="img/home.png"></img>
+              <!--<img class="cart-container_path_img_home" src="img/home.png" onclick="document.location='index.html'"></img>-->
+              <h2 class=h_style_path> / Оформление заказа</h2> <!-- Путь будет добавлено динамически из JavaScript -->
+            </div>
+          </div>
+
+          <div class="outer-cartContainer">
+            <div id="cartContainer">
+
+            </div>
+
+            <div class="delivery" id="delivery" style = "display: block;">
+                <div>
+                    <label value="manager" class="selected">
+                      <input type="radio" name="delivery" value="manager" checked>
+                      <span>Доставку обсужу с менеджером</span>
+                    </label>
+                    <label value="no" class="unselected">
+                      <input type="radio" name="delivery" value="no" >
+                      <span>Самовывоз из кондитерской</span>
+                    </label>
                 </div>
 
-                <div class="outer-cartContainer">
-                    <div id="cartContainer">
+            </div>
 
-                    </div>
-                    
-                    <div class="makeOrder" id="makeOrder">
-
-                    </div>
-
-                    <div class="makeOrderButton" id="makeOrderButton">
-                        <button id ="makeOrderButton_button" >Отправить заказ</button>
-                    </div>
+            <div class="infocart" id="infocart" style = "display: block;">
+              <div>
+                <div class=h_style_infocart>
+                  <h2 > Заполните информацию для заказа:</h2>
                 </div>
+
+
+
+
+                <label class="ireset">
+                  <input type="tel" name="phone" value="" placeholder="Ваше имя">
+                    <span ></span>
+                </label>
+
+
+                <label class="ireset">
+                  <input type="email" name="email" value="" placeholder="Ваш телефон">
+                    <span ></span>
+                </label>
+
+
+                <label class="ireset">
+                  <input type="text" name="name" value="" placeholder="Ваша эл.почта">
+                    <span ></span>
+                </label>
+
+                <div class=h_style_infocart>
+                  <h2 > Выберите дату получения заказа:</h2>
+                </div>
+
+                <label class="ireset">
+                  <input type="date" name="Date" id="dataToday" min="" value=""  onfocus="this.select()"
+                  onclick="event.cancelBubble=true;this.select()">
+                </label>
+
+                <div class=h_style_infocart>
+                  <h2 > Укажите дополнительные пожелания:</h2>
+                </div>
+
+                <label class="ireset">
+                  <textarea name="prim" placeholder="" title="Ваши комментарии к заказу">
+                  </textarea>
+                </label>
+
+              </div>
             </div>
+
+
+            <div class="makeOrder" id="makeOrder">
             </div>
+
+            <div class="makeOrderButton" id="makeOrderButton">
+              <button id ="makeOrderButton_button" >Отправить заказ</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="script.js"></script>
    </body>
 </html>
+
