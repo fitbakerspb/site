@@ -754,6 +754,7 @@ function home_link_Listener() {
 };
 
 document.addEventListener('DOMContentLoaded', function() {
+  localStorage.clear();
   updateVisibleItemCount();
   getOrderButtons()
   showProductInCart();
