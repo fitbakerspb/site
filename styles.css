@@ -1859,21 +1859,27 @@ color: #999;
 
 
 
+#makeOrderButton {
+    z-index: 9;
 
-
-#makeOrderButton_button[disabled="false"]{
-    background: var(--btn-order-color-custom);
-    cursor: pointer;
 }
 
-#makeOrderButton_button[disabled="true"] {
+
+#makeOrderButton_button[visibility="false"]{
+
     background:#a78f8f;
     cursor: not-allowed;
 
 }
 
+#makeOrderButton_button[visibility="true"] {
+    background: var(--btn-order-color-custom);
+    cursor: pointer;
 
-#makeOrderButton_button{
+}
+
+
+#makeOrderButton_button {
     position: relative;
     top: 5px;
     left: 4%;
@@ -1898,6 +1904,9 @@ color: #999;
 
 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+
+    z-index: 10;
 
 
 

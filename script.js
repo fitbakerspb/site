@@ -361,6 +361,8 @@ function showCartContainer_itemQuantity_resultPrice() {
 
     const h2_makeOrder = makeOrder.querySelector('#h2_makeOrder');
 
+    const btn_order = document.querySelector('#makeOrderButton_button');
+
 
     h2_itemQuantity.textContent = `${itemQuantity}`;
     h2_resultPrice.textContent = `${resultPrice} руб.`;
@@ -375,14 +377,55 @@ function showCartContainer_itemQuantity_resultPrice() {
   if (resultPriceTotal === 0){
     itemDelivery.style.display = 'none';
     itemInfocart.style.display = 'none';
-    btn_order.setAttribute("disabled", "true");
+    btn_order.setAttribute("visibility", "false");
   }
   else {
+
+
     itemDelivery.style.display = 'block';
     itemInfocart.style.display = 'block';
-    btn_order.setAttribute("disabled", "false");
+    btn_order.setAttribute("visibility", "true");
+    //btn_order.setAttribute("disabled", "false");
+
     //btn_order.removeAttribute("disabled");
-  }
+
+
+    btn_order.addEventListener('click', function(){
+      const resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));
+      console.log('localStorage.getItem');
+      console.log(localStorage.getItem('cart'));
+
+      if (tg.MainButton.isVisible) {
+          tg.MainButton.hide();
+      }
+      else {
+          tg.MainButton.setText('Оплатить в телеграм или на сайте??');
+
+          const cart = JSON.parse(localStorage.getItem('cart')) || {};
+          console.log('localStorage.getItem');
+          console.log(localStorage.getItem('cart'));
+          delete cart;
+          console.log('localStorage.getItem');
+          console.log(localStorage.getItem('cart'));
+          console.log('cart');
+          console.log(cart);
+          const resultPriceTotal = JSON.parse(localStorage.getItem('resultPriceTotal')) || {};
+          delete resultPriceTotal;
+          console.log('resultPriceTotal_localStorage');
+          console.log(resultPriceTotal_localStorage);
+          tg.sendData(resultPriceTotal_localStorage);
+          localStorage.setItem('cart',{});
+          localStorage.setItem('resultPriceTotal',0);
+          tg.MainButton.show();
+          }
+      });
+
+      Telegram.WebApp.onEvent("mainButtonClicked", function(){
+          tg.sendData(JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal'))));
+      });
+
+
+  };
 
   h2_makeOrder.innerHTML = `<h2 class=h_style_makeOrder>Стоимость заказа: <span><b>${resultPriceTotal}</b></span> руб.</h2>`;
 
@@ -676,61 +719,21 @@ function cart_link_Listener() {
         showCartAmount();
         showCartContainer_itemQuantity_resultPrice();
         listenerCartContainer();
-        listenerWeightSelect()
+        listenerWeightSelect();
         loadSelectedOptions();
 
         saveRadioChange();
         listenerRadioChange();
 
-        setMinData ()
+        setMinData ();
+
+
 
 
         //saveSelectedOptions();
 
 
-        let tg = window.Telegram.WebApp;
-        tg.expand();
-        tg.MainButton.textColor = "#FFFFFF";
-        tg.MainButton.color = "#f5919b";
 
-
-
-        const btn_order = document.getElementById("makeOrderButton_button");
-        console.log('btn_order');
-        console.log(btn_order);
-
-        btn_order.addEventListener("click", function(){
-            const resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));
-
-
-            if (tg.MainButton.isVisible) {
-                tg.MainButton.hide();
-            }
-            else {
-                tg.MainButton.setText('Оплатить в телеграм или на сайте??');
-
-                const cart = JSON.parse(localStorage.getItem('cart')) || {};
-                console.log('localStorage.getItem');
-                console.log(localStorage.getItem('cart'));
-                delete cart;
-                console.log('localStorage.getItem');
-                console.log(localStorage.getItem('cart'));
-                console.log('cart');
-                console.log(cart);
-                const resultPriceTotal = JSON.parse(localStorage.getItem('resultPriceTotal')) || {};
-                delete resultPriceTotal;
-                console.log('resultPriceTotal_localStorage');
-                console.log(resultPriceTotal_localStorage);
-                tg.sendData(resultPriceTotal_localStorage);
-                localStorage.setItem('cart',{});
-                localStorage.setItem('resultPriceTotal',0);
-                tg.MainButton.show();
-            }
-        });
-
-        Telegram.WebApp.onEvent("mainButtonClicked", function(){
-            tg.sendData(JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal'))));
-        });
 
         //let usercard = document.getElementById('usercard');
         //let p = document.createElement('p');
@@ -1070,3 +1073,5 @@ function setMinData () {
   document.getElementById('dataToday').min = minDate;
   document.getElementById('dataToday').value = minDate;
 };
+
+
