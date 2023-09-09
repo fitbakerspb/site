@@ -407,20 +407,16 @@ function showCartContainer_itemQuantity_resultPrice() {
       else {
           tg.MainButton.setText('Оплатить в телеграм или на сайте??');
 
-          const cart = JSON.parse(localStorage.getItem('cart')) || {};
-          console.log('localStorage.getItem');
-          console.log(localStorage.getItem('cart'));
-          delete cart;
-          console.log('localStorage.getItem');
-          console.log(localStorage.getItem('cart'));
-          console.log('cart');
-          console.log(cart);
-          const resultPriceTotal = JSON.parse(localStorage.getItem('resultPriceTotal')) || {};
-          delete resultPriceTotal;
-          console.log('resultPriceTotal_localStorage');
-          console.log(resultPriceTotal_localStorage);
+          //const cart = JSON.parse(localStorage.getItem('cart')) || {};
+          
+          //delete cart;
+          
+          //const resultPriceTotal = JSON.parse(localStorage.getItem('resultPriceTotal')) || {};
+          //delete resultPriceTotal;
+          
           tg.sendData(resultPriceTotal_localStorage);
           localStorage.setItem('cart',{});
+          localStorage.setItem('selectOption',{});
           localStorage.setItem('resultPriceTotal',0);
           tg.MainButton.show();
           }
