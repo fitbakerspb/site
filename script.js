@@ -58,9 +58,6 @@ window.addEventListener('scroll', function() {
 
 localStorage.setItem('products', JSON.stringify(products));
 
-
-
-
 function assignCategory() {
   // Получаем все контейнеры с товарами
   const allItems = document.querySelectorAll('.item');
@@ -78,9 +75,6 @@ function assignCheckboxBlocks() {
   // Получаем все контейнеры с товарами
   const cb_item = document.querySelector('.cb_items_div');
 
-
-
-
   cb_item.insertAdjacentHTML('beforeend',`<div class="cb_item">
   <input type="checkbox" id="checkbox1" name="category" value="all" onchange="handleCheckboxChange(this)">
   <label for="checkbox1">все торты</label><br>
@@ -89,9 +83,6 @@ function assignCheckboxBlocks() {
   <label for="checkbox${index + 2}">${option_value.name}</label><br>
   </div>`).join('')}`);
 };
-
-
-
 
 function showProductInCart() {
   const cart = JSON.parse(localStorage.getItem('cart')) || {};
@@ -129,7 +120,6 @@ function showCartAmount() {
     }
 }
 
-
 function getOrderButtons() {
 
   // Получаем все кнопки "Заказать"
@@ -165,15 +155,11 @@ function getOrderButtons() {
   })
 }
 
-
-
 function showCartContainer() {
 
   // Получаем данные из localStorage и строим корзину на странице cart.html
   const cartData = JSON.parse(localStorage.getItem('cart'));
   //const optionsData = JSON.parse(localStorage.getItem('selectOption')) ;
-
-
 
   const cartItem = document.querySelector('#cartContainer');
   cartItem.innerHTML = '';
@@ -191,17 +177,11 @@ function showCartContainer() {
 
     //const priceProductValue = priceProduct['price'];
 
-
-
-
-
     //const cartImgElement = document.createElement('img');
     //cartImgElement.src = cartProduct.images[0];
     //cartImgElement.alt = 'Фото товара';
     //cartItem.appendChild(cartImgElement);
     //const resultPrice = itemQuantity*priceProductValue
-
-
 
     cartItem.insertAdjacentHTML('beforeend',`
     <div class="cartContainer" id=${itemId}>
@@ -213,23 +193,7 @@ function showCartContainer() {
         </div>
       </div>
 
-
-
-
-
       <div class=select-options>
-
-
-
-
-
-
-
-
-
-
-
-
 
         <div>
           <h2 class="h_style_p_a_t">Количество:</h2>
@@ -282,11 +246,6 @@ function showCartContainer() {
           </select>
         </div>
 
-
-
-
-
-
         <div>
           <h2 class="h_style_p_a_t">Тип: </h2>
           <select class="selectoptions" id="select_2" size="1"><option value="1">П/п торт (2000 руб / кг)</option><option value="2">Классический торт (1800руб. / кг)</option></select>
@@ -300,14 +259,11 @@ function showCartContainer() {
       </div>
     </div>`);
 
-
   };
   //resultPriceTotal += resultPrice;
   makeOrder.innerHTML = '';
 
   makeOrder.insertAdjacentHTML('beforeend',`<h2 class=h_style_makeOrder id="h2_makeOrder"></h2>`);
-
-
 
 };
 
@@ -316,8 +272,6 @@ function showCartContainer_itemQuantity_resultPrice() {
   const cartData = JSON.parse(localStorage.getItem('cart'));
   const optionsData = JSON.parse(localStorage.getItem('selectOption')) ;
 
-
-
   const cartItem = document.querySelector('#cartContainer');
   //cartItem.innerHTML = '';
   const makeOrder = document.querySelector('#makeOrder');
@@ -325,7 +279,6 @@ function showCartContainer_itemQuantity_resultPrice() {
   const itemDelivery = document.querySelector('#delivery');
   const itemInfocart = document.querySelector('#infocart');
   const btn_order = document.querySelector('#makeOrderButton_button');
-
 
   //let optionsDataCategory = '1';
   let resultPrice = 0;
@@ -363,7 +316,6 @@ function showCartContainer_itemQuantity_resultPrice() {
 
     const btn_order = document.querySelector('#makeOrderButton_button');
 
-
     h2_itemQuantity.textContent = `${itemQuantity}`;
     h2_resultPrice.textContent = `${resultPrice} руб.`;
     //h2_weightValue.textContent = `${weightValue} кг.`;
@@ -377,16 +329,15 @@ function showCartContainer_itemQuantity_resultPrice() {
   if (resultPriceTotal === 0){
     itemDelivery.style.display = 'none';
     itemInfocart.style.display = 'none';
+    const cartItem = document.querySelector('#cartContainer');
+    cartItem.remove();
     btn_order.setAttribute("visibility", "false");
   }
   else {
-
-    
     let tg = window.Telegram.WebApp;
     tg.expand();
     tg.MainButton.textColor = "#FFFFFF";
     tg.MainButton.color = "#f5919b";
-
 
     itemDelivery.style.display = 'block';
     itemInfocart.style.display = 'block';
@@ -395,37 +346,38 @@ function showCartContainer_itemQuantity_resultPrice() {
 
     //btn_order.removeAttribute("disabled");
 
-
     btn_order.addEventListener('click', function(){
       const resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));
-      console.log('localStorage.getItem');
-      console.log(localStorage.getItem('cart'));
-
       if (tg.MainButton.isVisible) {
-          tg.MainButton.hide();
-      }
-      else {
-          tg.MainButton.setText('Оплатить в телеграм или на сайте??');
+        tg.MainButton.hide();
+    }
+    else {
+        tg.MainButton.setText('Оплатить в телеграм или на сайте??');
 
-          //const cart = JSON.parse(localStorage.getItem('cart')) || {};
-          
-          //delete cart;
-          
-          //const resultPriceTotal = JSON.parse(localStorage.getItem('resultPriceTotal')) || {};
-          //delete resultPriceTotal;
-          
-          tg.sendData(resultPriceTotal_localStorage);
-          localStorage.setItem('cart',{});
-          localStorage.setItem('selectOption',{});
-          localStorage.setItem('resultPriceTotal',0);
-          tg.MainButton.show();
-          }
-      });
+        //const cart = JSON.parse(localStorage.getItem('cart')) || {};
+        
+        //delete cart;
+        
+        //const resultPriceTotal = JSON.parse(localStorage.getItem('resultPriceTotal')) || {};
+        //delete resultPriceTotal;
+        
+        tg.sendData(resultPriceTotal_localStorage);
+        const cart = {};
+        delete cart;
+        const selectOption = {};
+        delete selectOption;
 
-      Telegram.WebApp.onEvent("mainButtonClicked", function(){
-          tg.sendData(JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal'))));
-      });
+        localStorage.clear('cart');
+        localStorage.clear('selectOption');
+        //localStorage.setItem('selectOption',selectOption);
+        localStorage.setItem('resultPriceTotal',0);
 
+        showCartAmount();
+        showCartContainer_itemQuantity_resultPrice();
+    };
+
+
+    });
 
   };
 
@@ -433,25 +385,9 @@ function showCartContainer_itemQuantity_resultPrice() {
 
 };
 
-
-
-
-
-
 function listenerCartContainer() {
 
   const cartData = JSON.parse(localStorage.getItem('cart'));
-
-
-  //const optionsData = JSON.parse(localStorage.getItem('selectOption'));
-
-  //const cartItem = document.querySelector('#cartContainer');
-  //cartItem.innerHTML = '';
-  //const makeOrder = document.querySelector('#makeOrder');
-  //let optionsDataCategory = '1';
-  //let resultPriceTotal = 0;
-  // Выводим данные в корзине на странице cart.html
-
 
   const minus_amount_block = document.querySelectorAll('.minus_amount');
   minus_amount_block.forEach(button => {
@@ -480,13 +416,8 @@ function listenerCartContainer() {
 
       localStorage.setItem('cart', JSON.stringify(cart));
 
-      //showProductInCart();
-      //showCartContainer();
       showCartAmount();
       showCartContainer_itemQuantity_resultPrice();
-      //loadSelectedOptions()
-
-
 
     });
   });
@@ -501,10 +432,6 @@ function listenerCartContainer() {
       const cart = JSON.parse(localStorage.getItem('cart')) || {};
       cart[itemId] += itemQuantity;
       localStorage.setItem('cart', JSON.stringify(cart));
-
-      //showProductInCart();
-      //showCartContainer();
-      //loadSelectedOptions()
       showCartAmount();
       showCartContainer_itemQuantity_resultPrice();
 
@@ -524,9 +451,6 @@ function listenerCartContainer() {
       localStorage.setItem('selectOption', JSON.stringify(selectOption));
       const cartContainer = document.querySelector(`.cartContainer[id="${itemId}"]`);
       cartContainer.remove();
-      //showProductInCart();
-      //showCartContainer();
-      //loadSelectedOptions();
       showCartAmount();
       showCartContainer_itemQuantity_resultPrice();
 
@@ -536,15 +460,6 @@ function listenerCartContainer() {
 }
 
 function listenerWeightSelect() {
-
-
-
-  //const cartItem = document.querySelector('#cartContainer');
-  //cartItem.innerHTML = '';
-  //const makeOrder = document.querySelector('#makeOrder');
-  //let optionsDataCategory = '1';
-  //let resultPriceTotal = 0;
-  // Выводим данные в корзине на странице cart.html
 
   const minus_weight_block = document.querySelectorAll('.minus_weight');
   minus_weight_block.forEach(button => {
@@ -593,7 +508,6 @@ function listenerWeightSelect() {
   });
 }
 
-
 function loadPage(pageUrl, callback) {
   var xhr = new XMLHttpRequest();
   xhr.onload = function() {
@@ -608,7 +522,6 @@ function loadPage(pageUrl, callback) {
   xhr.open('GET', pageUrl, true);
   xhr.send();
 
-
 };
 
 function saveSelectedOptions() {
@@ -620,7 +533,6 @@ function saveSelectedOptions() {
 
   //const selectElement_1 = document.querySelector('select[id="select_1"]');
   const cartContainers = document.querySelectorAll('.cartContainer');
-
 
   cartContainers.forEach(cartContainer => {
     const productId = cartContainer.id
@@ -636,18 +548,9 @@ function saveSelectedOptions() {
 };
 
 function loadSelectedOptions() {
-  //if (JSON.parse(localStorage.getItem('current_page')) === 'cart') {
-  //localStorage.clear();
-
-  //let selectOption_LS_reverse = {}
-  //let selectOption_LS_sub_reverse = {}
-
 
   const selectOption_LS = JSON.parse(localStorage.getItem('selectOption')) || {};
-  //|| {"select_1":0,"select_2":0,"select_3":0};
 
-
-  //const selectElement_1 = document.querySelector('select[id="select_1"]');
   const cartContainers = document.querySelectorAll('.cartContainer') || {};
 
   cartContainers.forEach(cartContainer => {
@@ -658,24 +561,13 @@ function loadSelectedOptions() {
 
     const selectOption_LS_sub = selectOption_LS[productId] || {};
 
-
-    //if (localStorage.getItem('selectOption') === null) {
-    //  localStorage.setItem('selectOption', JSON.stringify(selectOption_LS));
-
-    //}
-
-
-
-
-
     selectElements.forEach(selectElement => {
       const id = selectElement.id
       selectElement.value = selectOption_LS_sub[id]
 
     });
-    //selectOption_LS_reverse[productId] = selectOption_LS_sub_reverse
+
   });
-  //localStorage.setItem('selectOption', JSON.stringify(selectOption_LS_reverse));
 
   const selectElements = document.querySelectorAll('.selectoptions');
   selectElements.forEach(selectElement => {
@@ -692,14 +584,9 @@ function loadSelectedOptions() {
       selectOption_LS[cartContainer_id] = selectOption_LS_sub;
 
       localStorage.setItem('selectOption', JSON.stringify(selectOption_LS));
-      //showCartContainer();
+
       loadSelectedOptions();
       showCartContainer_itemQuantity_resultPrice();
-
-
-      //const selectedOptionValue = this.value;
-      //saveSelectedOptions();
-
 
     });
   });
@@ -715,8 +602,6 @@ function cart_link_Listener() {
       localStorage.setItem('current_page', JSON.stringify(current_page));
       loadPage('cart.html', function() {
 
-        //showProductInCart();
-
         showCartContainer();
         showCartAmount();
         showCartContainer_itemQuantity_resultPrice();
@@ -729,21 +614,6 @@ function cart_link_Listener() {
 
         setMinData ();
 
-
-
-
-        //saveSelectedOptions();
-
-
-
-
-        //let usercard = document.getElementById('usercard');
-        //let p = document.createElement('p');
-        //p.innerText = '${tg.initDataUnsafe.user.first_name}${tg.initDataUnsafe.user.last_name}';
-        //usercard.appendChild(p);
-        //cart_link = document.getElementById("cart");
-        //home_link = document.getElementById("container_path_img_home");
-        //window.location.reload();
         cart_link_Listener();
         home_link_Listener();
 
@@ -952,8 +822,6 @@ function listenerCheckboxChange() {
   });
 };
 
-
-
 function handleCheckboxChange(checkbox) {
     const checkboxes = document.querySelectorAll('#checkboxBlock input[name="category"]');
 
@@ -987,9 +855,6 @@ function filterByCategory(selectedValues) {
 };
 
 
-
-
-
 // Функция для изменения цвета фона и записи в localStorage
 function handleRadioChange(event) {
   // Получаем все радиокнопки и соответствующие им label
@@ -1012,9 +877,7 @@ function handleRadioChange(event) {
   localStorage.setItem('delivery', selectedValue);
   listenerRadioChange();
 
-
 };
-
 
 function listenerRadioChange() {
   const radioButtons = document.querySelectorAll('input[type="radio"]');
@@ -1039,8 +902,6 @@ if (savedDelivery) {
 
     const labels = document.querySelector('.delivery').querySelectorAll('label');
 
-
-
     // Устанавливаем цвет фона для всех label
     labels.forEach((label) => {
       label.classList.remove('selected'); // Снимаем класс 'selected' со всех label
@@ -1059,7 +920,6 @@ if (savedDelivery) {
   };
 };
 };
-
 
 function setMinData () {
   // Получаем текущую дату
