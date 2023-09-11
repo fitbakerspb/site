@@ -1119,6 +1119,7 @@ body {
     position: relative;
     left: 5%;
     width: 90%;
+    min-height: 50px;
     color: var(--font-color-dark);
     font-size: var(--title-font-size);
     padding-top: 3px;
