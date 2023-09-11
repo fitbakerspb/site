@@ -74,6 +74,9 @@ function assignCategory() {
 function assignCheckboxBlocks() {
   // Получаем все контейнеры с товарами
   const cb_item = document.querySelector('.cb_items_div');
+  console.log('cb_item');
+  console.log(cb_item);
+
 
   cb_item.insertAdjacentHTML('beforeend',`<div class="cb_item">
   <input type="checkbox" id="checkbox1" name="category" value="all" onchange="handleCheckboxChange(this)">
@@ -334,10 +337,6 @@ function showCartContainer_itemQuantity_resultPrice() {
     btn_order.setAttribute("visibility", "false");
   }
   else {
-    let tg = window.Telegram.WebApp;
-    tg.expand();
-    tg.MainButton.textColor = "#FFFFFF";
-    tg.MainButton.color = "#f5919b";
 
     itemDelivery.style.display = 'block';
     itemInfocart.style.display = 'block';
@@ -348,33 +347,19 @@ function showCartContainer_itemQuantity_resultPrice() {
 
     btn_order.addEventListener('click', function(){
       const resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));
-      if (tg.MainButton.isVisible) {
-        tg.MainButton.hide();
-    }
-    else {
-        tg.MainButton.setText('Оплатить в телеграм или на сайте??');
 
-        //const cart = JSON.parse(localStorage.getItem('cart')) || {};
-        
-        //delete cart;
-        
-        //const resultPriceTotal = JSON.parse(localStorage.getItem('resultPriceTotal')) || {};
-        //delete resultPriceTotal;
-        
-        tg.sendData(resultPriceTotal_localStorage);
-        const cart = {};
-        delete cart;
-        const selectOption = {};
-        delete selectOption;
+      const cart = {};
+      delete cart;
+      const selectOption = {};
+      delete selectOption;
 
-        localStorage.clear('cart');
-        localStorage.clear('selectOption');
-        //localStorage.setItem('selectOption',selectOption);
-        localStorage.setItem('resultPriceTotal',0);
+      localStorage.clear('cart');
+      localStorage.clear('selectOption');
+      //localStorage.setItem('selectOption',selectOption);
+      localStorage.setItem('resultPriceTotal',0);
 
-        showCartAmount();
-        showCartContainer_itemQuantity_resultPrice();
-    };
+      showCartAmount();
+      showCartContainer_itemQuantity_resultPrice();
 
 
     });
@@ -630,9 +615,21 @@ function home_link_Listener() {
     home_link.addEventListener('click', function () {
       current_page = 'home';
       //window.location.reload();
-      loadPage('index.html', function() {});
-      showCartAmount();
-      listenerCheckboxChange();
+      loadPage('index.html', function() {
+        updateVisibleItemCount();
+        getOrderButtons()
+        showProductInCart();
+        assignCategory();
+        assignCheckboxBlocks();
+        showCartAmount();
+        listenerCheckboxChange();
+        cart_link_Listener();
+        home_link_Listener();
+
+
+
+      });
+
 
     })
   };
@@ -772,6 +769,7 @@ function product_details_link_Listener() {
 
 function listenerCheckboxChange() {
 
+  console.log('listenerCheckboxChange');
   const paragraphs = document.querySelectorAll('.p_cat');
   paragraphs.forEach(paragraph => {
       paragraph.addEventListener('click', () => {
@@ -784,6 +782,8 @@ function listenerCheckboxChange() {
 
   // Получаем элементы кнопок и блока с чекбоксами
   const toggleButton = document.getElementById('toggleButton') || {};
+  console.log('toggleButton');
+  console.log(toggleButton);
   const checkboxBlock = document.getElementById('checkboxBlock') || {};
   const applyButton = document.getElementById('applyButton') || {};
 
