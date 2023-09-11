@@ -338,6 +338,10 @@ function showCartContainer_itemQuantity_resultPrice() {
     btn_order.setAttribute("visibility", "false");
   }
   else {
+    let tg = window.Telegram.WebApp;
+    tg.expand();
+    tg.MainButton.textColor = "#FFFFFF";
+    tg.MainButton.color = "#f5919b";
 
     itemDelivery.style.display = 'block';
     itemInfocart.style.display = 'block';
