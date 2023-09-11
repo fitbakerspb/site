@@ -348,18 +348,29 @@ function showCartContainer_itemQuantity_resultPrice() {
     btn_order.addEventListener('click', function(){
       const resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));
 
-      const cart = {};
-      delete cart;
-      const selectOption = {};
-      delete selectOption;
+      if (tg.MainButton.isVisible) {
+        tg.MainButton.hide();
+      }
+      else {
+          tg.MainButton.setText('Оплатить в телеграм или на сайте??');
+          tg.sendData(resultPriceTotal_localStorage);
+          tg.MainButton.show();
 
-      localStorage.clear('cart');
-      localStorage.clear('selectOption');
-      //localStorage.setItem('selectOption',selectOption);
-      localStorage.setItem('resultPriceTotal',0);
+          const cart = {};
+          delete cart;
+          const selectOption = {};
+          delete selectOption;
+    
+          localStorage.clear('cart');
+          localStorage.clear('selectOption');
+          //localStorage.setItem('selectOption',selectOption);
+          localStorage.setItem('resultPriceTotal',0);
+    
+          showCartAmount();
+          showCartContainer_itemQuantity_resultPrice();
+          }
 
-      showCartAmount();
-      showCartContainer_itemQuantity_resultPrice();
+
 
 
     });
