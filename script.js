@@ -358,7 +358,7 @@ function showCartContainer_itemQuantity_resultPrice() {
       }
       else {
           tg.MainButton.setText('Оплатить в телеграм или на сайте??');
-          tg.sendData(resultPriceTotal_localStorage,optionsData);
+          tg.sendData(optionsData);
           tg.MainButton.show();
 
           const cart = {};
