@@ -1,4 +1,4 @@
-//localStorage.clear();
+localStorage.clear();
 //Массивы с информацией о товарах
 const products = [
   {id: '1',name: '«Морковный» торт с фундучным пралине и грушевым компоте', images: ['photos/1_1.jpg','photos/1_2.jpg'],description: 'Бисквитный торт приготовлен без муки и без сахара🎂🔥\nКбжу на 100 гр 141/8/8/10\nСостав:\n🍰Ароматный морковный бисквит\n🍰Цитрусовый крем \n🍰Грушевое компоте \n🍰Невероятно вкусное фундучное пралине',weight: '1,5кг',price: '2000',categories: ['п/п торты'],options1: ['без начинки']},
@@ -892,7 +892,11 @@ function handleRadioChange(event) {
   correspondingLabel.classList.remove('unselected');
 
   // Записываем выбранное значение в localStorage
-  localStorage.setItem('delivery', selectedValue);
+  const cartInfo = JSON.parse(localStorage.getItem('cartInfo')) || {};
+  cartInfo[`radio`]=selectedValue;
+  localStorage.setItem('cartInfo', JSON.stringify(cartInfo));
+
+
   listenerRadioChange();
 
 };
@@ -907,7 +911,10 @@ function listenerRadioChange() {
 // Функция для изменения цвета фона и записи в localStorage
 function saveRadioChange() {
 // При загрузке страницы, проверяем, есть ли сохраненное значение в localStorage
-const savedDelivery = localStorage.getItem('delivery');
+const cartInfo = JSON.parse(localStorage.getItem('cartInfo')) || {};
+
+const savedDelivery = cartInfo[`radio`]
+//const savedDelivery = localStorage.getItem('cartInfo')
 if (savedDelivery) {
   // Если есть, выбираем соответствующую радиокнопку и вызываем событие change
 
