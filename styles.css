@@ -776,7 +776,7 @@ body {
     margin-left: 18px;
     letter-spacing: 0px;
     font-family: 'Montserrat-ExtraLight';
-    font-size: 12px;
+    font-size: 14px;
     color: #3f3a3a;
     z-index: 10;
 }
@@ -1571,7 +1571,7 @@ var(--tg-theme-button-text-color)
 letter-spacing: 0px;
 font-family: 'Montserrat-ExtraLight';
 
-font-size: 12px;
+font-size: 14px;
 color: #020202;
 z-index: 10;
 }
