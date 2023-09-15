@@ -221,8 +221,8 @@ function showCartContainer() {
             <div>
 
 
-              <img src="img/minus_light.png" class=minus_weight id=${itemId}></img>
-              <img src="img/plus_light.png" class=plus_weight id=${itemId}></img>
+              <img src="img/minus.png" class=minus_weight id=${itemId}></img>
+              <img src="img/plus.png" class=plus_weight id=${itemId}></img>
 
 
             </div>
@@ -282,6 +282,8 @@ function showCartContainer_itemQuantity_resultPrice() {
 
   const itemDelivery = document.querySelector('#delivery');
   const itemInfocart = document.querySelector('#infocart');
+  const itemDressing = document.querySelector('#dressing');
+
   const btn_order = document.querySelector('#makeOrderButton_button');
 
   //let optionsDataCategory = '1';
@@ -333,6 +335,7 @@ function showCartContainer_itemQuantity_resultPrice() {
   if (resultPriceTotal === 0){
     itemDelivery.style.display = 'none';
     itemInfocart.style.display = 'none';
+    itemDressing.style.display = 'none';
     const cartItem = document.querySelector('#cartContainer');
     cartItem.remove();
     btn_order.setAttribute("visibility", "false");
@@ -345,13 +348,14 @@ function showCartContainer_itemQuantity_resultPrice() {
 
     itemDelivery.style.display = 'block';
     itemInfocart.style.display = 'block';
+    itemDressing.style.display = 'block';
     btn_order.setAttribute("visibility", "true");
     //btn_order.setAttribute("disabled", "false");
 
     //btn_order.removeAttribute("disabled");
 
     btn_order.addEventListener('click', function(){
-      const resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));
+      //const resultPriceTotal_localStorage = JSON.stringify(JSON.parse(localStorage.getItem('resultPriceTotal')));
 
       if (tg.MainButton.isVisible) {
         tg.MainButton.hide();
@@ -360,15 +364,28 @@ function showCartContainer_itemQuantity_resultPrice() {
           tg.MainButton.setText('Оплатить в телеграм или на сайте??');
           //tg.sendData(resultPriceTotal_localStorage);
           //const sendData = optionsData['1']['select_1'].toString()
-          const sendData = optionsData['1']['select_1'].toString()
+          //const sendData = optionsData['1']['select_1'].toString()
+          const cartInfo = JSON.parse(localStorage.getItem('cartInfo')) || {};
 
+          if (cartInfo['radio']) {
+          } else {
+            cartInfo['radio'] = 'manager';
+            };
+
+          const inputDate = document.querySelector('input[type="date"]');
+
+          if (cartInfo['date']) {
+          } else {
+            cartInfo['date'] = inputDate.min;
+            };
+
+          localStorage.setItem('cartInfo', JSON.stringify(cartInfo));
+
+          console.log(localStorage);
           tg.sendData(localStorage);
           tg.MainButton.show();
 
-          const cart = {};
-          delete cart;
-          const selectOption = {};
-          delete selectOption;
+
 
           localStorage.clear('cart');
           localStorage.clear('selectOption');
