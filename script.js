@@ -359,27 +359,25 @@ function showCartContainer_itemQuantity_resultPrice() {
       else {
           tg.MainButton.setText('Оплатить в телеграм или на сайте??');
           //tg.sendData(resultPriceTotal_localStorage);
-
+          //const sendData = optionsData['1']['select_1'].toString()
           const sendData = optionsData['1']['select_1'].toString()
-          tg.sendData(sendData);
+
+          tg.sendData(localStorage);
           tg.MainButton.show();
 
           const cart = {};
           delete cart;
           const selectOption = {};
           delete selectOption;
-    
+
           localStorage.clear('cart');
           localStorage.clear('selectOption');
           //localStorage.setItem('selectOption',selectOption);
           localStorage.setItem('resultPriceTotal',0);
-    
+
           showCartAmount();
           showCartContainer_itemQuantity_resultPrice();
           }
-
-
-
 
     });
 
@@ -615,6 +613,7 @@ function cart_link_Listener() {
 
         saveRadioChange();
         listenerRadioChange();
+        listenerInputChange();
 
         setMinData ();
 
@@ -956,3 +955,23 @@ function setMinData () {
 };
 
 
+  function listenerInputChange() {
+
+    // Получаем все кнопки "Заказать"
+    const inputName = document.querySelectorAll(`input`);
+    console.log('inputName');
+    console.log(inputName);
+
+
+    // Обработчик для кнопки "Заказать"
+    inputName.forEach(inputItem => {
+      inputItem.addEventListener('input', function() {
+        const itemValue = inputItem.value;
+        const itemType = inputItem.type;
+        const cartInfo = JSON.parse(localStorage.getItem('cartInfo')) || {};
+        cartInfo[`${itemType}`]=itemValue;
+        localStorage.setItem('cartInfo', JSON.stringify(cartInfo));
+
+      });
+    })
+  }
