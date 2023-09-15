@@ -361,7 +361,7 @@ function showCartContainer_itemQuantity_resultPrice() {
           //tg.sendData(resultPriceTotal_localStorage);
           console.log('optionsData');
           console.log(optionsData['1']['select_1']);
-          tg.sendData(optionsData['1']['select_1']);
+          tg.sendData('1');
           tg.MainButton.show();
 
           const cart = {};
