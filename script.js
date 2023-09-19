@@ -585,7 +585,7 @@ function loadSelectedOptions() {
 
 function cart_link_Listener() {
 
-  cart_link = document.getElementById("cart");
+  const cart_link = document.getElementById("cart");
   // Назначаем обработчик события клика на кнопке
   cart_link.addEventListener('click', function () {
       current_page = 'cart';
