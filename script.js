@@ -1,35 +1,10 @@
-const products = [
-  {id: '1',name: '«Морковный» торт с фундучным пралине и грушевым компоте', images: ['photos/1_1.jpg','photos/1_2.jpg'],description: 'Бисквитный торт приготовлен без муки и без сахара🎂🔥\nКбжу на 100 гр 141/8/8/10\nСостав:\n🍰Ароматный морковный бисквит\n🍰Цитрусовый крем \n🍰Грушевое компоте \n🍰Невероятно вкусное фундучное пралине',weight: '1,5кг',price: '2000',categories: ['п/п торты'],options1: ['без начинки']},
-  {id: '2',name: '«Шварцвальдский» с вишней',images: ['photos/2_1.jpg','photos/2_2.jpg'],description: 'Вес ~ 1,8 кг 🔥\n\nКБЖУ на 100 грамм всего - 180/10/10/12.5 ❤️‍🔥',price: '2000',categories: ['классика','п/п торты'],options1: ['без начинки','карамель','цитрусовый курд','вишня','лимон']},
-  {id: '3',name: '«Рафаэлло»',images: ['photos/3_1.jpg','photos/3_2.jpg'],description: 'Кбжу на 100 грамм 192/10/12/15\nСостав: \n🥥Нежные и сочные кокосовые коржи\n🥥Кокосовый крем \n🥥Начинка из карамелизованого хрустящего миндаля',price: '1000',categories: ['классика','п/п торты'],options1: ['без начинки','карамель','цитрусовый курд','вишня','лимон']},
-  {id: '4',name: '«Вишня-кокос» с чизкейком внутри',images: ['photos/4_1.jpg','photos/4_2.jpg'],description: 'Кбжу на 100 гр.: 167/10/11,2/6,4\nСостав:\n🍰Ароматный кокосовый бисквит\n🍰Сочный вишневый соус \n🍰Нежный кокосовый чизкейк \n🍰Крем с нотками кокоса',price: '2000',categories: ['классика','п/п торты'],options1: ['без начинки','карамель','цитрусовый курд','вишня','лимон']},
-];
-const selectOptions_categories = [
-  {id: '1',name: 'п/п торты', price: '2000'},
-  {id: '2',name: 'классика', price: '1800'}
-  ];
-const selectOptions_weights = [
-  {id: '1', weight: '1.5'},
-  {id: '2', weight: '2'},
-  {id: '3', weight: '2.5'},
-  {id: '4', weight: '3'},
-  {id: '5', weight: '3.5'},
-  {id: '6', weight: '4'},
-  {id: '7', weight: '4.5'},
-  {id: '8', weight: '5'},
-  {id: '9', weight: '5.5'},
-  {id: '10', weight: '6'},
-  {id: '11', weight: '6.5'},
-  {id: '12', weight: '7'},
-  {id: '13', weight: '7.5'},
-  {id: '14', weight: '8'},
-  {id: '15', weight: '8.5'},
-  {id: '16', weight: '9'},
-  {id: '17', weight: '9.5'},
-  {id: '18', weight: '10'},
-];
+import {products} from './dict.js';
+import {selectOptions_categories} from './dict.js';
+import {selectOptions_weights} from './dict.js';
+import {selectOptions_default} from './dict.js';
 
-const selectOptions_default = [{'select_1': 1,'select_2': '1', 'select_3': '1'}];
+
+
 
 function goBack() {
   window.history.back();
@@ -72,8 +47,7 @@ function assignCategory() {
 function assignCheckboxBlocks() {
   // Получаем все контейнеры с товарами
   const cb_item = document.querySelector('.cb_items_div');
-  console.log('cb_item');
-  console.log(cb_item);
+
 
 
   cb_item.insertAdjacentHTML('beforeend',`<div class="cb_item">
@@ -378,7 +352,7 @@ function showCartContainer_itemQuantity_resultPrice() {
 
           localStorage.setItem('cartInfo', JSON.stringify(cartInfo));
 
-          console.log(localStorage);
+
           tg.sendData(localStorage);
           tg.MainButton.show();
 
@@ -804,7 +778,7 @@ function product_details_link_Listener() {
 
 function listenerCheckboxChange() {
 
-  console.log('listenerCheckboxChange');
+
   const paragraphs = document.querySelectorAll('.p_cat');
   paragraphs.forEach(paragraph => {
       paragraph.addEventListener('click', () => {
@@ -817,8 +791,7 @@ function listenerCheckboxChange() {
 
   // Получаем элементы кнопок и блока с чекбоксами
   const toggleButton = document.getElementById('toggleButton') || {};
-  console.log('toggleButton');
-  console.log(toggleButton);
+
   const checkboxBlock = document.getElementById('checkboxBlock') || {};
   const applyButton = document.getElementById('applyButton') || {};
 
@@ -841,8 +814,7 @@ function listenerCheckboxChange() {
       const selectedValues = [];
       selectedCheckboxes.forEach(checkbox => {
         selectedValues.push(checkbox.value);
-        console.log('selectedValues');
-        console.log(selectedValues);
+
     });
       if (selectedValues.length > 0) {
         filterByCategory(selectedValues);
@@ -983,8 +955,7 @@ function setMinData () {
 
     // Получаем все кнопки "Заказать"
     const inputName = document.querySelectorAll(`input`);
-    console.log('inputName');
-    console.log(inputName);
+
 
 
     // Обработчик для кнопки "Заказать"
