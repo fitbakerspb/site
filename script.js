@@ -25,7 +25,6 @@ const selectOptions_weights = [
   
 const selectOptions_default = [{'select_1': 1,'select_2': '1', 'select_3': '1'}];
 
-
 function goBack() {
   window.history.back();
 }
