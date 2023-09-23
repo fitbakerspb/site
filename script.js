@@ -361,6 +361,19 @@ function showCartContainer_itemQuantity_resultPrice() {
           } else {
             cartInfo['radio'] = 'manager';
             };
+          if (cartInfo['text']) {
+          } else {
+            cartInfo['text'] = '-';
+            };
+          if (cartInfo['tel']) {
+          } else {
+            cartInfo['tel'] = '-';
+            };
+          if (cartInfo['info']) {
+          } else {
+            cartInfo['info'] = '-';
+            };
+  
 
           const inputDate = document.querySelector('input[type="date"]');
 
